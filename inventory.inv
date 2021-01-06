@@ -1,0 +1,5 @@
+[cache_flush]
+54.201.101.226 ansible_user=ambabdocker
+
+[staging_docker]
+54.201.101.226 ansible_user=ambabdocker
