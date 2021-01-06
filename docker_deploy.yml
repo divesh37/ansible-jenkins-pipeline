@@ -1,0 +1,24 @@
+---
+- hosts: staging_docker
+  gather_facts: false
+
+  tasks:
+    - include_vars: vars.yml
+    - community.general.docker_compose:
+        project_src: /Data/projects/prisma
+        build: no
+        restarted: yes
+      register: output
+      notify:
+         - Restart_docker
+    - debug: msg={{ output }}
+    - command: bash -lc "cd /Data/projects/prisma && docker-compose -f docker-compose.yml ps -q php"
+      register: container_id
+    - debug: msg={{ container_id.stdout }}
+    - command: "{{ item }}"
+      with_items:
+              - "{{ dep_cmd }}"
+    - community.general.docker_compose:
+        project_src: /Data/projects/prisma
+        build: no
+        restarted: yes
