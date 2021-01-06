@@ -9,8 +9,6 @@
         build: no
         restarted: yes
       register: output
-      notify:
-         - Restart_docker
     - debug: msg={{ output }}
     - command: bash -lc "cd /Data/projects/prisma && docker-compose -f docker-compose.yml ps -q php"
       register: container_id
