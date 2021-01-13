@@ -1,6 +1,8 @@
 ---
 - hosts: staging_docker
   gather_facts: false
+  environment:
+    PYTHONPATH: /usr/lib/python2.7/site-packages
 
   tasks:
     - include_vars: vars.yml
