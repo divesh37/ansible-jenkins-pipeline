@@ -3,3 +3,6 @@
 
 [staging_docker]
 54.201.101.226
+
+[vars:all]
+ansible_python_interpreter=/usr/bin/python3
