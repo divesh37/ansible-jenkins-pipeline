@@ -1,6 +1,7 @@
 ---
 - hosts: staging_docker
   gather_facts: false
+  become: true
   environment:
     PYTHONPATH: /usr/lib/python2.7/site-packages
 
