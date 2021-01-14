@@ -10,11 +10,11 @@ pipeline{
                 echo (path)
             }
         }
-        stage('Git Checkout'){
-            steps{
-                git branch: 'ansible-playbook', credentialsId: 'gitlab_auth', url: 'https://gitlab.ambab.com/devops/devops.git'
-            }
-        }
+   //     stage('Git Checkout'){
+   //         steps{
+    //            git branch: 'ansible-playbook', credentialsId: 'gitlab_auth', url: 'https://gitlab.ambab.com/devops/devops.git'
+     //       }
+      //  }
         
         stage('Deploy') {
             steps {
