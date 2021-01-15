@@ -22,7 +22,8 @@ pipeline{
                         extraVars: [
                         //    project_path: '/Data/projects/prisma',
                               project_path: '${p_path}',
-                              composeyaml: 'docker-compose.uat.yml',
+			      composefile: '${composefile}'
+                        //    composeyaml: 'docker-compose.uat.yml',
                         ])
                  }
             }
