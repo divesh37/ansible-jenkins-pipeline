@@ -16,7 +16,7 @@ pipeline{
                 ansiColor('xterm'){
                     ansiblePlaybook(
                         playbook: 'deploy_roles.yml',
-                        inventory: 'inventory.inv',
+                        inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         colorized: true,
                         extraVars: [
