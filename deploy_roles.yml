@@ -7,6 +7,12 @@
 
 
    tasks:
+    - name: pull from git
+      git:
+        repo: https://gitlab.ambab.com/alfa/alfa-hn.git
+        dest: /Data/projects/alfa-hn
+        update: yes
+        version: devlop
     - name: Running docker deploy role...
       include_role:
         name: roles/docker_deploy
