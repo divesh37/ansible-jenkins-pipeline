@@ -1,12 +1,10 @@
 ---
 # tasks file for docker_deploy
-#    - include_vars: vars.yml
     - docker_service:
         project_src: "{{ project_path }}"
-	files: "{{ composefile }}"
+        files: "{{ composefile }}"
         build: no
         restarted: yes
-      register: output
     - debug: msg={{ output }}
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
