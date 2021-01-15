@@ -13,7 +13,7 @@
         dest: /Data/projects/alfa-hn
         update: yes
         version: devlop
-        force: no
+        force: yes
     - name: Running docker deploy role...
       include_role:
         name: roles/docker_deploy
