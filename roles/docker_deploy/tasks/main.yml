@@ -13,6 +13,7 @@
               - "{{ dep_cmd }}"
     - docker_service:
         project_src: "{{ project_path }}"
+        files: "{{ composefile }}"
         build: no
         restarted: yes
 
