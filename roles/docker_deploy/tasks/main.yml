@@ -7,7 +7,7 @@
         restarted: yes
       register: output
     - debug: msg={{ output }}
-    - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composeyaml }} ps -q php"
+    - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
     - debug: msg={{ container_id.stdout }}
     - command: "{{ item }}"
