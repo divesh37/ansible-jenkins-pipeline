@@ -15,13 +15,12 @@ pipeline{
                 git branch: 'develop', credentialsId: 'e80492cc-69dc-49e4-85ce-612fd56f6833', url: 'https://gitlab.ambab.com/alfa/alfa-hn.git'
             }
         }
-
         stage('Deploy') {
             steps {
                 echo 'deploying...'
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: '../deploy_roles.yml',
+                        playbook: 'deploy_roles.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         colorized: true,
