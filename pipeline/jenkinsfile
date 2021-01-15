@@ -15,14 +15,14 @@ pipeline{
                 echo 'deploying...'
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'roles.yml',
+                        playbook: 'deploy_roles.yml',
                         inventory: 'inventory.inv',
                         credentialsId: '226_docker',
                         colorized: true,
                         extraVars: [
                         //    project_path: '/Data/projects/prisma',
                               project_path: '${p_path}',
-                              composeyaml: 'docker-compose.yml',
+                              composeyaml: 'docker-compose.uat.yml',
                         ])
                  }
             }

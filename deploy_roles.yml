@@ -9,4 +9,4 @@
    tasks:
     - name: Running docker deploy role...
       include_role:
-        name: docker_deploy
+        name: roles/docker_deploy
