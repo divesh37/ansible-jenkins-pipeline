@@ -1,3 +1,5 @@
+---
+# vars file for docker_deploy
 dep_cmd:
         - "docker exec {{ container_id.stdout }} bin/magento maintenance:enable"
         - "docker exec {{ container_id.stdout }} composer install"
@@ -12,5 +14,3 @@ dep_cmd:
         - "docker exec {{ container_id.stdout }} /bin/bash -c 'chmod u+x bin/magento'"
         - "docker exec {{ container_id.stdout }} bin/magento maintenance:disable"
 
-path: 
-- "/data/projects/prisma"

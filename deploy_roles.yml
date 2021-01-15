@@ -1,0 +1,12 @@
+---
+ - hosts: staging_docker
+   gather_facts: false
+   become: true
+   environment:
+    PYTHONPATH: /usr/lib/python2.7/site-packages
+
+
+   tasks:
+    - name: Running docker deploy role...
+      include_role:
+        name: docker_deploy

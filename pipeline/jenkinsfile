@@ -1,34 +1,28 @@
 pipeline{
     agent any
-        environment {
+    environment {
         project_path = "/Data/projects/prisma"
     }
     stages{
         stage('Initiating Pipeline'){
             steps{
                 echo 'Starting Pipeline'
-                echo (path)
+                echo '${p_path}'
             }
         }
-   //     stage('Git Checkout'){
-   //         steps{
-    //            git branch: 'ansible-playbook', credentialsId: 'gitlab_auth', url: 'https://gitlab.ambab.com/devops/devops.git'
-     //       }
-      //  }
-        
         stage('Deploy') {
             steps {
                 echo 'deploying...'
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'docker_deploy.yml',
+                        playbook: 'roles.yml',
                         inventory: 'inventory.inv',
                         credentialsId: '226_docker',
                         colorized: true,
                         extraVars: [
-                            project_path: '/Data/projects/prisma',
-                          //  project_path: '${params.path}',
-                            composeyaml: 'docker-compose.yml',
+                        //    project_path: '/Data/projects/prisma',
+                              project_path: '${p_path}',
+                              composeyaml: 'docker-compose.yml',
                         ])
                  }
             }
