@@ -1,6 +1,6 @@
 ---
 # tasks file for docker_deploy
-    - include_vars: vars.yml
+#    - include_vars: vars.yml
     - docker_service:
         project_src: "{{ project_path }}"
         build: no
