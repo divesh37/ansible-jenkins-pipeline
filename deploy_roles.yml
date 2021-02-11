@@ -9,10 +9,10 @@
    tasks:
     - name: pull from git
       git:
-        repo: https://gitlab.ambab.com/alfa/alfa-hn.git
+        repo: https://gitlab.ambab.com/gitl-godrej/hoshan1.git
         dest: "{{ project_path }}"
         update: yes
-        version: develop
+        version: staging 
         force: yes
     - name: Running docker deploy role...
       include_role:
