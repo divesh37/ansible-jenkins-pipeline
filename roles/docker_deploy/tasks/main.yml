@@ -1,0 +1,19 @@
+---
+# tasks file for docker_deploy
+    - docker_service:
+        project_src: "{{ project_path }}"
+        files: "{{ composefile }}"
+        build: no
+        restarted: yes
+    - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
+      register: container_id
+    - debug: msg={{ container_id.stdout }}
+    - command: "{{ item }}"
+      with_items:
+              - "{{ dep_cmd }}"
+    - docker_service:
+        project_src: "{{ project_path }}"
+        files: "{{ composefile }}"
+        build: no
+        restarted: yes
+

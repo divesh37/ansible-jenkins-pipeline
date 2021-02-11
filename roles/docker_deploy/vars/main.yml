@@ -1,0 +1,16 @@
+---
+# vars file for docker_deploy
+dep_cmd:
+        - "docker exec {{ container_id.stdout }} bin/magento maintenance:enable"
+        - "docker exec {{ container_id.stdout }} composer install"
+        - "docker exec {{ container_id.stdout }} rm -rf var/page_cache/* var/cache/* generated/code/* generated/metadata/* var/view_preprocessed/*"
+        - "docker exec {{ container_id.stdout }} bin/magento setup:upgrade"
+        - "docker exec {{ container_id.stdout }} bin/magento setup:di:compile"
+        - "docker exec {{ container_id.stdout }} bin/magento setup:static-content:deploy -f  -j 16"
+        - "docker exec {{ container_id.stdout }} bin/magento cache:flush"
+        - "docker exec {{ container_id.stdout }} /bin/bash -c 'chmod -R 775 . && chown -R www-data:www-data .'"
+        - "docker exec {{ container_id.stdout }} /bin/bash -c find var generated pub/static pub/media app/etc -type f -exec chmod g+w {}"
+        - "docker exec {{ container_id.stdout }} /bin/bash -c find var generated pub/static pub/media app/etc -type d -exec chmod g+ws {}"
+        - "docker exec {{ container_id.stdout }} /bin/bash -c 'chmod u+x bin/magento'"
+        - "docker exec {{ container_id.stdout }} bin/magento maintenance:disable"
+

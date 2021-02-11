@@ -1,0 +1,8 @@
+---
+# tasks file for composer_install
+    - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
+      register: container_id
+    - debug: msg={{ container_id.stdout }}
+    - command: "docker exec {{ container_id.stdout }} composer install"
+      register: comp_ins
+    - debug: msg={{ comp_ins }}
