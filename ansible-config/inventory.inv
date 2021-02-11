@@ -1,0 +1,8 @@
+[cache_flush]
+54.201.101.226
+
+[staging_docker]
+54.201.101.226
+
+[vars]
+ansible_python_interpreter=/usr/bin/python3

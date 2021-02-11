@@ -1,0 +1,19 @@
+---
+ - hosts: staging_docker
+   gather_facts: false
+   become: true
+   environment:
+    PYTHONPATH: /usr/lib/python2.7/site-packages
+
+
+   tasks:
+    - name: pull from git
+      git:
+        repo: https://gitlab.ambab.com/gitl-godrej/hoshan1.git
+        dest: "{{ project_path }}"
+        update: yes
+        version: staging 
+        force: yes
+    - name: Running docker deploy role...
+      include_role:
+        name: roles/docker_deploy

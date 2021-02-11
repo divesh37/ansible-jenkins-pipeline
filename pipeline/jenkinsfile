@@ -1,0 +1,32 @@
+pipeline{
+    agent any
+    environment {
+        project_path = "/Data/projects/prisma"
+    }
+    stages{
+        stage('Initiating Pipeline'){
+            steps{
+                echo 'Starting Pipeline'
+                echo '${p_path}'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'deploying...'
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'deploy_roles.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: '226_docker',
+                        colorized: true,
+                        extraVars: [
+                        //    project_path: '/Data/projects/prisma',
+                              project_path: '${p_path}',
+			                  composefile: '${composefile}'
+                        //    composeyaml: 'docker-compose.uat.yml',
+                        ])
+                 }
+            }
+        }
+    }
+}
