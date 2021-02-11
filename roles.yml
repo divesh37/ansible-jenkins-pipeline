@@ -32,3 +32,6 @@
     - name: Setting permissions
       include_role:
         name: roles/commands
+    - name: Disabling maintenance mood
+      include_role:
+        name: roles/maintenance_disable
