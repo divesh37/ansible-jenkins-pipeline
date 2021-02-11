@@ -1,0 +1,34 @@
+---
+ - hosts: staging_docker
+   gather_facts: false
+   become: true
+   environment:
+    PYTHONPATH: /usr/lib/python2.7/site-packages
+
+
+   tasks:
+    - name: pull from git
+      git:
+        repo: https://gitlab.ambab.com/gitl-godrej/hoshan1.git
+        dest: "{{ project_path }}"
+        update: yes
+        version: staging
+        force: yes
+    - name: Enabling maintenance enable...
+      include_role:
+        name: roles/maintenance_enable
+    - name: Running composer install
+      include_role:
+        name: roles/composer_install
+    - name: Running setup upgrade
+      include_role:
+        name: roles/setup_upgrade
+    - name: Running di-compile
+      include_role:
+        name: roles/setup_di_compile
+    - name: Running static content deploy
+      include_role:
+        name: roles/static-content_deploy
+    - name: Setting permissions
+      include_role:
+        name: roles/commands
