@@ -12,7 +12,7 @@
         repo: https://gitlab.ambab.com/gitl-godrej/hoshan1.git
         dest: "{{ project_path }}"
         update: yes
-        version: staging
+        version: homepage
         force: yes
     - name: Enabling maintenance enable...
       include_role:
