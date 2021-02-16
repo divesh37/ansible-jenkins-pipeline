@@ -35,6 +35,6 @@
     - name: Disabling maintenance mood
       include_role:
         name: roles/maintenance_disable
-    - name: Restarting docker setup
-      include_role:
-        name: roles/docker_restart
+#    - name: Restarting docker setup
+#      include_role:
+#       name: roles/docker_restart
