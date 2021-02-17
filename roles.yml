@@ -8,15 +8,15 @@
 
    tasks:
     - name: Triming branch name
-      shell: echo "{{ branch }}" | sed 's/.*origin1\///'
+      shell: echo "{{ branch }}" | sed 's/.*origin*\///'
       register: branch_name
-    - debug: msg={{ branch_name }}
+    - debug: msg={{ branch_name.stdout }}
     - name: pull from git
       git:
         repo: https://gitlab.ambab.com/gitl-godrej/hoshan1.git
         dest: "{{ project_path }}"
         update: yes
-        version: "{{ branch.stdout }}"
+        version: "{{ branch_name.stdout }}"
         force: yes
     - name: Enabling maintenance enable...
       include_role:
