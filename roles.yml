@@ -9,8 +9,8 @@
    tasks:
     - name: Triming branch name
       shell: echo "{{ branch }}" | sed 's/.*origin\///'
-      register: branch
-    - debug: msg={{ branch.stdout }}
+      register: branch_name
+    - debug: msg={{ branch_name.stdout }}
     - name: pull from git
       git:
         repo: https://gitlab.ambab.com/gitl-godrej/hoshan1.git
