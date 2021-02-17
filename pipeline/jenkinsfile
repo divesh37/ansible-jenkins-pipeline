@@ -8,12 +8,13 @@ pipeline{
             steps{
                 echo 'Starting Pipeline'
                 echo '${p_path}'
+                echo '${select_branch}
             }
         }
         stage('Build') {
             steps{
                 echo 'branch name is "${select_branch}"'
-                GIT_BRANCH_NAME=`echo "$select_branch" | sed "s/.*origin\///"`
+                GIT_BRANCH_NAME=`sh echo "$select_branch" | sed "s/.*origin\///"`
             }
         }
         stage('Deploy') {
