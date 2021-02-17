@@ -7,12 +7,16 @@
 
 
    tasks:
+    - name: Triming branch name
+      shell: echo "{{ branch }}" | sed 's/.*origin\///'
+      register: branch
+    - debug: msg={{ branch.stdout }}
     - name: pull from git
       git:
         repo: https://gitlab.ambab.com/gitl-godrej/hoshan1.git
         dest: "{{ project_path }}"
         update: yes
-        version: "{{ branch }}"
+        version: "{{ branch.stdout }}"
         force: yes
     - name: Enabling maintenance enable...
       include_role:
