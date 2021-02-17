@@ -8,7 +8,7 @@
 
    tasks:
     - name: Triming branch name
-      shell: echo "{{ branch }}" | sed 's/.*origin*\///'
+      shell: echo "{{ branch }}" | sed 's/.*origin1\///'
       register: branch_name
     - debug: msg={{ branch_name.stdout }}
     - name: pull from git
