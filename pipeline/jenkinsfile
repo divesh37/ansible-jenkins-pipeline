@@ -14,7 +14,7 @@ pipeline{
         stage('Build') {
             steps{
                 echo 'branch name is ${select_branch}'
-                echo '$select_branch | sed 's/.*origin\///''
+                echo '$select_branch | sed \'s/.*origin\\///\''
             }
         }
         stage('Deploy') {
