@@ -15,6 +15,7 @@ pipeline{
             steps{
                 echo 'branch name is ${select_branch}'
                 sh 'GIT_BRANCH_NAME=`echo "$select_branch" | sed \'s/.*origin\\///\'`'
+                echo '${GIT_BRANCH_NAME}'
             }
         }
         stage('Deploy') {
