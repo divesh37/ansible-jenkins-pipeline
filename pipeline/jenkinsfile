@@ -12,7 +12,7 @@ pipeline{
         }
         stage('Build') {
             steps{
-                echo 'Pulling...' + env.BRANCH_NAME
+                echo 'branch name is ${branch_selector}'
             }
         }
         stage('Deploy') {
