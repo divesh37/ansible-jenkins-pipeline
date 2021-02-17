@@ -10,7 +10,7 @@
     - name: Triming branch name
       shell: echo "{{ branch }}" | sed 's/.*origin\///'
       register: branch_name
-    - debug: msg={{ branch_name.stdout }}
+    - debug: msg={{ branch_name }}
     - name: pull from git
       git:
         repo: https://gitlab.ambab.com/gitl-godrej/hoshan1.git
