@@ -14,7 +14,7 @@ pipeline{
         stage('Build') {
             steps{
                 echo 'branch name is ${select_branch}'
-                GIT_BRANCH_NAME=$(echo "$select_branch" | sed \'s/.*origin\\///\')
+                script: 'GIT_BRANCH_NAME=`echo "$select_branch" | sed \'s/.*origin\\///\'`'
                 echo '${GIT_BRANCH_NAME}'
             }
         }
