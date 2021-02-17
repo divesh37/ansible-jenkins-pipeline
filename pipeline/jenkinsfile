@@ -12,7 +12,9 @@ pipeline{
         }
         stage('Build') {
             steps{
-                echo 'branch name is ${branch_selector}'
+                echo 'branch name is ${select_branch}'
+                GIT_BRANCH_NAME=`echo "$branch_selector" | sed 's/.*origin\///'`
+                echo 'GIT BRANCH IS: ${GIT_BRANCH_NAME}'
             }
         }
         stage('Deploy') {
@@ -28,7 +30,7 @@ pipeline{
                         //    project_path: '/Data/projects/prisma',
                               project_path: '${p_path}',
 			                  composefile: '${composefile}',
-                              branch: '${select_branch}'
+                              branch: '${GIT_BRANCH_NAME}'
                         //    composeyaml: 'docker-compose.uat.yml',
                         ])
                  }
