@@ -8,7 +8,7 @@ pipeline{
             steps{
                 echo 'Starting Pipeline'
                 echo '${p_path}'
-                echo '${select_branch}
+                echo '${select_branch}'
             }
         }
         stage('Build') {
