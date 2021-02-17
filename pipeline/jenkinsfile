@@ -31,7 +31,7 @@ pipeline{
                         //    project_path: '/Data/projects/prisma',
                               project_path: '${p_path}',
 			                  composefile: '${composefile}',
-                              branch: '${GIT_BRANCH_NAME}'
+                              branch: 'homepage'
                         //    composeyaml: 'docker-compose.uat.yml',
                         ])
                  }
