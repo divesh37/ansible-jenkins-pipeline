@@ -1,8 +1,8 @@
 pipeline{
     agent any
-    environment {
-        project_path = "/Data/projects/prisma"
-    }
+   // environment {
+        //project_path = "/Data/projects/prisma"
+   // }
     stages{
         stage('Initiating Pipeline'){
             steps{
