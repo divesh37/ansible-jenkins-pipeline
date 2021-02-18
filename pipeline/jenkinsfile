@@ -3,6 +3,19 @@ pipeline{
     environment {
         project_path = "/Data/projects/prisma"
     }
+    parameters {
+        gitParameter branchFilter: 'origin.*/(.*)', defaultValue: 'homepage', name: 'BRANCH_A', type: 'PT_BRANCH', useRepository: '.*devops.git'
+        
+    }
+    stages {
+        stage('BranchListing') {
+            steps {
+                git branch: "${params.BRANCH_A}", url: 'https://gitlab.ambab.com/devops/devops.git'
+            }
+        }
+    }
+
+
     stages{
         stage('Initiating Pipeline'){
             steps{
