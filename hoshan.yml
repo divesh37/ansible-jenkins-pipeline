@@ -11,7 +11,7 @@
       shell: echo "{{ branch }}" | sed 's/.*origin1\///'
       register: branch_name
     - debug: msg={{ branch_name.stdout }}
-    - name: pull from git
+    - name: Running git pull..
       git:
         repo: https://gitlab.ambab.com/gitl-godrej/hoshan1.git
         dest: "{{ project_path }}"
