@@ -2,8 +2,8 @@
  - hosts: staging_docker
    gather_facts: false
    become: true
-#   environment:
-#    PYTHONPATH: /usr/local/lib/python3.7/site-packages
+   environment:
+    PYTHONPATH: /root/.local/lib/python2.7/site-packages
 
 
    tasks:
