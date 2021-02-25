@@ -13,7 +13,7 @@
     - debug: msg={{ branch_name.stdout }}
     - name: pull from git
       git:
-        repo: "{{ Repository }}"
+        repo: "{{ repository }}"
         dest: "{{ project_path }}"
         update: yes
         version: "{{ branch_name.stdout }}"
