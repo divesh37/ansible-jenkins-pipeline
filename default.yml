@@ -3,7 +3,7 @@
    gather_facts: false
    become: true
    environment:
-    PYTHONPATH: /usr/lib/python2.7/site-packages
+    PYTHONPATH: /usr/local/lib/python3.7/site-packages
 
 
    tasks:
