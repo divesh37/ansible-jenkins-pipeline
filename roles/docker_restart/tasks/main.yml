@@ -5,4 +5,5 @@
         files: "{{ composefile }}"
         build: no
         restarted: yes
+      tags: restart
 
