@@ -13,7 +13,7 @@
     - debug: msg={{ branch_name.stdout }}
     - name: pull from git
       git:
-        repo: https://gitlab.ambab.com/gitl-godrej/hoshan1.git
+        repo: "{{ Repository }}"
         dest: "{{ project_path }}"
         update: yes
         version: "{{ branch_name.stdout }}"
