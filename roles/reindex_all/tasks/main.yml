@@ -2,7 +2,7 @@
 # tasks file for reindex_all
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
-      tag: reindex_all
+      tags: reindex_all
     - command: "docker exec {{ container_id.stdout }} bin/magento indexer:reindex"
       tags: reindex_all
 
