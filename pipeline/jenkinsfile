@@ -15,9 +15,10 @@ pipeline{
                 echo 'deploying...'
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml --tags test',
+                        playbook: 'default.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
+                        tags: 'test'
                         colorized: true,
                         extraVars: [
                         //    project_path: '/Data/projects/prisma',
