@@ -5,7 +5,5 @@
       command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
-    - command: "docker exec {{ container_id.stdout }} bin/magento indexer:reset"
-    - command: "docker exec {{ container_id.stdout }} bin/magento indexer:status"
     - command: "docker exec {{ container_id.stdout }} bin/magento indexer:reindex"
-    - command: "docker exec {{ container_id.stdout }} bin/magento indexer:status"
+      tags: reindex_all

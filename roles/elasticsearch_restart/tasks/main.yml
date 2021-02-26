@@ -1,0 +1,8 @@
+---
+# tasks file for elasticsearch_restart
+    - docker_service:
+        project_src: "{{ project_path }}"
+        files: "{{ composefile }}"
+        build: no
+        restarted: yes
+      tags: elasticsearch_restart
