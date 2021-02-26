@@ -18,7 +18,7 @@ pipeline{
                         playbook: 'default.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
-                        skip-tags: 'test',
+                        skiptags: 'test',
                         colorized: true,
                         extraVars: [
                         //    project_path: '/Data/projects/prisma',
