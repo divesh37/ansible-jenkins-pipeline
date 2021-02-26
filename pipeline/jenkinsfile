@@ -15,7 +15,7 @@ pipeline{
                 echo 'deploying...'
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'default.yml --tags test',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         colorized: true,
