@@ -1,9 +1,7 @@
 ---
 # tasks file for reindex_all
-    - name: Checking container status
-      become: True
-      command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
+    - debug: msg={{ container_id.stdout }}
     - command: bash -lc "docker exec {{ container_id.stdout }} bin/magento indexer:reindex"
       tags: reindex_all
