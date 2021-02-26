@@ -42,5 +42,7 @@
     - name: Restarting docker setup
       include_role:
        name: roles/docker_restart
-      tags: 
-      - restart
+      tags: restart
+    - name: Running test tags
+      shell: echo "hello world"
+      tags: test
