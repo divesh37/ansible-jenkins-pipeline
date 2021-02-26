@@ -43,7 +43,6 @@
       include_role:
        name: roles/docker_restart
       tags: restart
-<<<<<<< HEAD
     - name: Reindex all 
       include_role:
        name: roles/reindex_all
@@ -52,8 +51,3 @@
       include_role:
        name: roles/elasticsearch_restart
       tags: elasticsearch_restart
-=======
-    - name: Running test tags
-      shell: echo "hello world"
-      tags: test
->>>>>>> ad9a9c103c8f9773916eef7282bd71899b89e8c7
