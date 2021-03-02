@@ -1,38 +1,40 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Flush magento cache.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Developers are required to flush the magento cahce whenever they made any changes to code or run any deployment commands in the projects on docker setup on staging server 54.201.101.226.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Below one variables is bging used with the cache flush jenkins job.
+
+1. Project path - Project path is required to get the container id and run the bin/magento cache:flush command.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+There is no dependencies for role.
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: staging-docker
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: ambabdocker.cache_flush, x: 42 }
 
 License
 -------
 
-BSD
+None.
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Ambab DevOps Team.!
