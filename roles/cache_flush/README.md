@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Flush magento cache.
+To Flush magento cache.
 
 Requirements
 ------------
