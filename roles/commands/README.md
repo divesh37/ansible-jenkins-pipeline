@@ -1,22 +1,42 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+This role is used with deployemnt steps.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Below commands are required to be run when developer do the deployment after they made any changes to the code. 
+
+1. rm -rf var/page_cache/* var/cache/* generated/code/* generated/metadata/* var/view_preprocessed/*
+2. chmod -R 775 . && chown -R www-data:www-data .
+3. find var generated pub/static pub/media app/etc -type f -exec chmod g+w {}
+4. find var generated pub/static pub/media app/etc -type d -exec chmod g+ws {}
+5. chmod u+x bin/magento
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The above command is being used as below where we require below variable to be setup on jenkins job.
+
+1. Project path.
+2. Docker compose file.
+3. Container ID.
+
+    - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
+    - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
+      register: container_id
+    - command: "docker exec {{ container_id.stdout }} rm -rf var/page_cache/* var/cache/* generated/code/* generated/metadata/* var/view_preprocessed/*"
+    - command: "docker exec {{ container_id.stdout }} /bin/bash -c 'chmod -R 775 . && chown -R www-data:www-data .'"
+    - command: "docker exec {{ container_id.stdout }} /bin/bash -c find var generated pub/static pub/media app/etc -type f -exec chmod g+w {}"
+    - command: "docker exec {{ container_id.stdout }} /bin/bash -c find var generated pub/static pub/media app/etc -type d -exec chmod g+ws {}"
+    - command: "docker exec {{ container_id.stdout }} /bin/bash -c 'chmod u+x bin/magento'"
+
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
 Example Playbook
 ----------------
@@ -25,14 +45,14 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: ambabdocker.commands, x: 42 }
 
 License
 -------
 
-BSD
+Not Required.
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Ambab DevOps Team.!
