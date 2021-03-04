@@ -1,8 +1,8 @@
 ---
 # tasks file for roles/cache_flush
-    - name: Checking container status
-      become: True
-      command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
+    - name: Getting container id
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
+      tags: cache_flush
     - command: "docker exec {{ container_id.stdout }} bin/magento cache:flush"
+      tags: cache_flush
