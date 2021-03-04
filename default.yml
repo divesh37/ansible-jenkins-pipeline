@@ -33,6 +33,10 @@
     - name: Running static content deploy
       include_role:
         name: roles/static-content_deploy
+    - name: Running cache flush
+      include_role:
+        name: roles/cache_flush
+      tags: flush_cache
     - name: Setting permissions
       include_role:
         name: roles/commands
