@@ -1,22 +1,27 @@
-Role Name
+Role Name: Docker_Restart
 =========
 
-A brief description of the role goes here.
+When this role is called it will restart the docker containers mentioned in docker-compose.yml file in project directory.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Project directory path and doker-compose.yml is required to get this role executed on any project.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Below two jenkins variable is required to be passed in pipeline.
+
+1. Project path.
+2. Docker compose file.
+
+Above both variable is mentioned in yml to get this role exucted on particular project.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role require docker-py and docker-compose ansible modules to be installed on the target host. If the modules are not installed an exception is configured in playbook to debug the output stating both of these package should be installed in the machine.
 
 Example Playbook
 ----------------
@@ -25,14 +30,14 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: ambabdocker.docker_restasrt, x: 42 }
 
 License
 -------
 
-BSD
+Not Requried.
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Ambab DevOps Team.!
