@@ -1,22 +1,22 @@
-Role Name
+Role Name: Elasticserach_Restart
 =========
 
-A brief description of the role goes here.
+This role will be used to restart the elasticsearch container running on staging server whenever required.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Elasticsearch compose file path is reuiqred as an argument from jenkins user interface. 
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+1. Docker compose file and it's path variable is configured in jenkins user interface.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role require docker-py and docker-compose ansible modules to be installed on the target host. If the modules are not installed an exception is configured in playbook to debug the output stating both of these package should be installed in the machine.
 
 Example Playbook
 ----------------
@@ -25,14 +25,14 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: ambabdocker.elasticserach_restart, x: 42 }
 
 License
 -------
 
-BSD
+Not Required.
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Ambab DevOps Team.!
