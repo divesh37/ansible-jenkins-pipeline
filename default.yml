@@ -20,7 +20,7 @@
         force: yes
       register: branch_changes
     - name: Below changes are made...
-      debug: msg={{ branch_changes.stdout }}
+      debug: msg={{ branch_changes }}
     - name: Enabling maintenance enable...
       include_role:
         name: roles/maintenance_enable
