@@ -6,6 +6,6 @@
     - command: "docker exec {{ container_id.stdout }} bin/magento indexer:reindex"
       register: indexer
       tags: reindex_all
-    - debug: msg={{ indexer}}
+    - debug: msg={{ indexer }}
       tags: reindex_all
 
