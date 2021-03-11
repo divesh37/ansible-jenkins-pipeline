@@ -4,3 +4,5 @@
       register: container_id
     - debug: msg={{ container_id.stdout }}
     - command: "docker exec {{ container_id.stdout }} composer install"
+      register: composer_install
+    - debug: msg={{ composer_install }}
