@@ -5,4 +5,6 @@
       command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
-    - command: "docker exec {{ container_id.stdout }} bin/magento setup:static-content:deploy -f  -j 16"
+    - command: "docker exec {{ container_id.stdout }} bin/magento setup:di:compile"
+      register: setup_di_compile
+    - debug: msg={{ setup_di_compile }}
