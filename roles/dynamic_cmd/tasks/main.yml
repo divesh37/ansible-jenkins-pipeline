@@ -1,10 +1,13 @@
 ---
 # tasks file for maintenance_enable
     - name: Checking container status
-      become: True
       command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
+      tags: dynamic_cmd
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
+      tags: dynamic_cmd
     - command: "docker exec {{ container_id.stdout }} {{ command }}"
-      register: dynamic_cmd
-    - debug: msg={{ dynamic_cmd }}
+      register: dynamic_cmd_output
+      tags: dynamic_cmd
+    - debug: msg={{ dynamic_cmd_output }}
+      tags: dynamic_cmd
