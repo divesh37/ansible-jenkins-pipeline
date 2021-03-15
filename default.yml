@@ -58,3 +58,7 @@
       include_role:
        name: roles/elasticsearch_restart
       tags: elasticsearch_restart
+    - name: Run your own choice command
+      include_role:
+       name: roles/dynamic_cmd
+      tags: dynamic_cmd
