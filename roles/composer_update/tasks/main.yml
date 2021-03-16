@@ -1,8 +1,8 @@
 ---
-# tasks file for composer_install
+# tasks file for roles/composer_update
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
     - debug: msg={{ container_id.stdout }}
-    - command: "docker exec {{ container_id.stdout }} composer install"
+    - command: "docker exec {{ container_id.stdout }} composer update"
       register: composer_install
     - debug: msg={{ composer_install }}
