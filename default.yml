@@ -29,7 +29,7 @@
         name: roles/composer_install
     - name: Running composer update
       include_role:
-        name: roles/composer_install
+        name: roles/composer_update
     - name: Running setup upgrade
       include_role:
         name: roles/setup_upgrade
