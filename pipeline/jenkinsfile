@@ -27,9 +27,4 @@ pipeline{
             }
         }
     }
-    post {
-        always {
-            emailext body: 'Post deploy job succedd', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Build succeed'
-            }
-        }
 }
