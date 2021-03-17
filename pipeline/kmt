@@ -1,0 +1,27 @@
+pipeline{
+    agent any
+    stages{
+        stage('Initiating Pipeline'){
+            steps{
+                echo 'Starting Pipeline'
+                echo '${p_path}'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'deploying...'
+                    ansiblePlaybook(
+                        playbook: 'kmt.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: '226_docker',
+                        skippedTags: 'elasticsearch_restart,reindex_all,dynamic_cmd',
+                        extraVars: [
+                              project_path: '${p_path}',
+			      composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+     }
+}
