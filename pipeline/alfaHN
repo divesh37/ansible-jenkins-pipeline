@@ -12,7 +12,7 @@ pipeline{
                 echo 'deploying...'
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'alfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         skippedTags: 'elasticsearch_restart,reindex_all,dynamic_cmd',
