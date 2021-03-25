@@ -6,6 +6,6 @@
       command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
     - name: Running static content deploy with Ambab/alfa en_US ar_SA argument...
-      command: "docker exec {{ container_id.stdout }} bin/magento bin/magento se:st:d -f -t Magento/backend -t Ambab/alfa -t Ambab/alfa-ar en_US ar_SA"
+      command: "docker exec {{ container_id.stdout }} bin/magento se:st:d -f -t Magento/backend -t Ambab/alfa -t Ambab/alfa-ar en_US ar_SA"
       register: static_content_deploy
     - debug: msg={{ static_content_deploy.stdout_lines }}
