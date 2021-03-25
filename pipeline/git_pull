@@ -11,10 +11,9 @@ pipeline{
             steps {
                 echo 'running git pull...'
                     ansiblePlaybook(
-                        playbook: 'kmt_git_pull.yml',
+                        playbook: 'git_pull.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
-#                        skippedTags: 'elasticsearch_restart,reindex_all,dynamic_cmd',
                         extraVars: [
                               project_path: '${p_path}',
 			      composefile: '${composefile}',
