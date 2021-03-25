@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        stage(starting Pipeline'){
+        stage('starting Pipeline'){
             steps{
                 echo 'Starting Pipeline'
                 echo '${p_path}'
