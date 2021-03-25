@@ -1,0 +1,23 @@
+---
+ - hosts: staging_docker
+   gather_facts: false
+   become: true
+   environment:
+    PYTHONPATH: /root/.local/lib/python2.7/site-packages
+
+
+   tasks:
+    - name: Triming branch name
+      shell: echo "{{ branch }}" | sed 's/.*origin1\///'
+      register: branch_name
+    - debug: msg={{ branch_name.stdout }}
+    - name: pull from git
+      git:
+        repo: "{{ repository }}"
+        dest: "{{ project_path }}"
+        update: yes
+        version: "{{ branch_name.stdout }}"
+        force: yes
+      register: branch_changes
+    - name: Below changes are made...
+      debug: msg={{ branch_changes }}
