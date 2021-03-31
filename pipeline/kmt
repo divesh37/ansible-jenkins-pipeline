@@ -22,14 +22,14 @@ pipeline{
                               repository: '${Repository}'
                         ])
                  }
-            }
-        post {
+        }
+    }
+    post {
         always {
           step([$class: 'Mailer',
             notifyEveryUnstableBuild: true,
             recipients: "${email}",
             sendToIndividuals: true])
         }
-      }
-     }
+    }
 }
