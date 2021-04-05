@@ -10,18 +10,21 @@ pipeline{
         stage('Deploy') {
             steps {
                 echo 'deploying...'
+                ansiColor('xterm'){
                     ansiblePlaybook(
                         playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         skippedTags: 'elasticsearch_restart,reindex_all,dynamic_cmd',
+                        colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
 			      composefile: '${composefile}',
                               branch: '${select_branch}',
                               repository: '${Repository}'
                         ])
-                 }
+                    }
+                }
         }
     }
     post {
