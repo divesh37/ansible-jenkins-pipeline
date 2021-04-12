@@ -8,14 +8,6 @@ pipeline{
                 echo '${p_path}'
             }
         }
-        stage('Sending Build Notification') {
-            steps {
-                mail to: '${email}',   
-                    subject: "Job $JOB_NAME " ,
-                    body: """Build started.                 
-                    Go to $BUILD_URL to check the running status."""
-            }
-        }
         stage('Deploy') {
             steps {
                 echo 'deploying...'
