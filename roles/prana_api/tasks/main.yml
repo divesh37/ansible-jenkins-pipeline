@@ -1,2 +1,13 @@
 ---
 # tasks file for roles/prana_api
+    - name: Checking container status
+      command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
+      tags: dynamic_cmd
+    - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q api"
+      register: container_id
+      tags: dynamic_cmd
+    - command: "docker exec {{ container_id.stdout }} {{ command }}"
+      register: dynamic_cmd_output
+      tags: dynamic_cmd
+    - debug: msg={{ dynamic_cmd_output }}
+      tags: dynamic_cmd
