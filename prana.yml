@@ -23,5 +23,5 @@
       debug: msg={{ branch_changes }}
     - name: Run your own choice command
       include_role:
-       name: roles/parana_api
+       name: roles/prana_api
       tags: prana_cmd
