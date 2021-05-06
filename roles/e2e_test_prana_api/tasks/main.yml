@@ -6,7 +6,7 @@
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q api"
       register: container_id
       tags: prana_e2e_test
-    - command: "docker exec {{ container_id.stdout }} "npm run test:e2e""
+    - command: "docker exec {{ container_id.stdout }} npm run test:e2e"
       register: prana_e2e_test_output
       tags: prana_e2e_test
     - debug: msg={{ prana_e2e_test_output }}
