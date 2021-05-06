@@ -7,7 +7,7 @@ pipeline{
                 echo '${p_path}'
             }
         }
-        stage('Git-Pull & Running test cases') {
+        stage('Git-Pull & Run test cases') {
             steps {
                 echo 'project repository cloning and pulling latest changes...'
                 ansiColor('xterm'){
