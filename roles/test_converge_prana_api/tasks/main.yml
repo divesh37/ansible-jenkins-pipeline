@@ -1,0 +1,12 @@
+---
+# tasks file for roles/test_converge_prana_api
+    - name: Checking container status
+      command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
+      tags: prana_conv_test
+    - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q api"
+      register: container_id
+      tags: prana_conv_test
+    - command: "docker exec {{ container_id.stdout }} "npm run test:cov""
+      register: prana_conv_test_output
+      tags: prana_conv_test
+    - debug: msg={{ prana_conv_test_output }}

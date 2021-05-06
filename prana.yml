@@ -21,6 +21,18 @@
       register: branch_changes
     - name: Below changes are made...
       debug: msg={{ branch_changes }}
+    - name: Running unit test
+      include_role:
+	name: roles/unit_test_prana_api
+      tags: prana_unit_test
+    - name: Running e2e test
+      include_role:
+	name: roles/e2e_test_prana_api
+      tags: prana_e2e_test
+    - name: Running conv test
+      include_role:
+	name: roles/test_converge_prana_api
+      tags: prana_conv_test
     - name: Run your own choice command
       include_role:
        name: roles/prana_api
