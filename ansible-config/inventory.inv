@@ -4,5 +4,8 @@
 [staging_docker]
 54.201.101.226
 
+[prisma]
+65.0.82.29
+
 [vars]
 ansible_python_interpreter=/usr/bin/python3
