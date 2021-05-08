@@ -4,4 +4,7 @@
       register: container_id
       tags: cache_flush
     - command: "docker exec {{ container_id.stdout }} bin/magento cache:flush"
+      register: cf
+      tags: cache_flush
+    - debug: msg={{ cg }}
       tags: cache_flush

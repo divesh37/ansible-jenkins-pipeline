@@ -39,7 +39,7 @@
     - name: Running cache flush
       include_role:
         name: roles/cache_flush
-      tags: flush_cache
+      tags: cache_flush
     - name: Setting permissions
       include_role:
         name: roles/commands
