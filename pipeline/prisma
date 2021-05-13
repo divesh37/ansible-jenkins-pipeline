@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        stage('Initiating Live Pipeline'){
+        stage('Initiating Pipeline'){
             steps{
                 echo 'Starting Pipeline'
                 echo '${p_path}'
@@ -11,7 +11,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'prisma_stage.yml',
+                        playbook: 'prisma_live.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         skippedTags: 'maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -29,7 +29,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'prisma_stage.yml',
+                        playbook: 'prisma_live.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         skippedTags: 'clone,maintenance_enable,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -47,7 +47,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'prisma_stage.yml',
+                        playbook: 'prisma_live.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         skippedTags: 'clone,maintenance_enable,composer_install,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -65,7 +65,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'prisma_stage.yml',
+                        playbook: 'prisma_live.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -83,7 +83,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'prisma_stage.yml',
+                        playbook: 'prisma_live.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -101,7 +101,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'prisma_stage.yml',
+                        playbook: 'prisma_live.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,static_content_deploy,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -119,7 +119,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'prisma_stage.yml',
+                        playbook: 'prisma_live.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,static_content_deploy,cache_flush,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -137,7 +137,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'prisma_stage.yml',
+                        playbook: 'prisma_live.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,static_content_deploy,cache_flush,permission,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -155,7 +155,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'prisma_stage.yml',
+                        playbook: 'prisma_live.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
                         skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,dynamic_cmd',
