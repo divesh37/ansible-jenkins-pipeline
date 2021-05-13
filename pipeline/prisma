@@ -16,7 +16,7 @@ pipeline{
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
 //                       skippedTags: 'elasticsearch_restart,reindex_all,dynamic_cmd',
-			tags: cache_flush
+			            tags: cache_flush,
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -35,7 +35,7 @@ pipeline{
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
         //               skippedTags: 'elasticsearch_restart,reindex_all,dynamic_cmd',
-			tags: cache_flush
+			            tags: cache_flush,
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
