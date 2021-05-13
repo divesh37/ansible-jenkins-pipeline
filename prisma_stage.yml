@@ -18,8 +18,8 @@
         update: yes
         version: "{{ branch_name.stdout }}"
         force: yes
-      register: branch_changes
       tags: clone
+      register: branch_changes
     - name: Below changes are made...
       debug: msg={{ branch_changes }}
     - name: Enabling maintenance enable...
