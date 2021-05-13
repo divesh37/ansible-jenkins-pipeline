@@ -1,0 +1,10 @@
+---
+# tasks file for roles/commands
+    - name: Checking container status
+      become: True
+      command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
+    - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
+      register: container_id
+    - command: "docker exec {{ container_id.stdout }} rm -rf var/page_cache/* var/cache/* generated/code/* generated/metadata/* var/view_preprocessed/*"
+      register: rm_rf
+    - debug: msg={{ rm_rf }}
