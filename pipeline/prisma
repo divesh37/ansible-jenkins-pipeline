@@ -9,7 +9,6 @@ pipeline{
         }
         stage('Clone') {
             steps {
-                echo 'cloning ${Repository}'
                 ansiColor('xterm'){
                     ansiblePlaybook(
                         playbook: 'prisma_stage.yml',
@@ -133,6 +132,7 @@ pipeline{
                         ])
                  }
             }
+        }
         stage('Disabling Maintenance Mood') {
             steps {
                 ansiColor('xterm'){
