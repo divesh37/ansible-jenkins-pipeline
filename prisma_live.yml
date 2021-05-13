@@ -27,6 +27,9 @@
     - name: Running composer install
       include_role:
         name: roles/composer_install
+    - name: removing cache files and directories
+      include_role:
+        name: roles/remove_cache
     - name: Running setup upgrade
       include_role:
         name: roles/setup_upgrade
