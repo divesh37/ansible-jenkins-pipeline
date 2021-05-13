@@ -12,11 +12,11 @@ pipeline{
                 echo 'deploying...'
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'prisma_live.yml',
+                        playbook: 'prisma_stage.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
 //                       skippedTags: 'elasticsearch_restart,reindex_all,dynamic_cmd',
-			            tags: cache_flush,
+	                tags: cache_flush,
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -31,11 +31,11 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'prisma_live.yml',
+                        playbook: 'prisma_stage.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
         //               skippedTags: 'elasticsearch_restart,reindex_all,dynamic_cmd',
-			            tags: cache_flush,
+	                tags: cache_flush,
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
