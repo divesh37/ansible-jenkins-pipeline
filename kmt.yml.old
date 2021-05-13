@@ -18,43 +18,37 @@
         update: yes
         version: "{{ branch_name.stdout }}"
         force: yes
-      tags: clone
+      register: branch_changes
+    - name: Below changes are made...
+      debug: msg={{ branch_changes }}
     - name: Enabling maintenance enable...
       include_role:
         name: roles/maintenance_enable
-      tags: maintenance_enable
     - name: Running composer install
       include_role:
         name: roles/composer_install
-      tags: composer_install
-    - name: removing cache files and directories
+    - name: Running composer update
       include_role:
-        name: roles/remove_cache
-      tags: remove_cache
+        name: roles/composer_update
     - name: Running setup upgrade
       include_role:
         name: roles/setup_upgrade
-      tags: setup_upgrade
     - name: Running di-compile
       include_role:
         name: roles/setup_di_compile
-      tags: di_compile
     - name: Running static content deploy
       include_role:
-        name: roles/static-content_deploy
-      tags: static_content_deploy
+        name: roles/static_content_deploy_multi_theme
     - name: Running cache flush
       include_role:
         name: roles/cache_flush
-      tags: cache_flush
+      tags: flush_cache
     - name: Setting permissions
       include_role:
         name: roles/commands
-      tags: permission
     - name: Disabling maintenance mood
       include_role:
         name: roles/maintenance_disable
-      tags: maintenance_disable
     - name: Restarting docker setup
       include_role:
        name: roles/docker_restart
