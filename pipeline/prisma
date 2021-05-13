@@ -7,7 +7,7 @@ pipeline{
                 echo '${p_path}'
             }
         }
-        stage('Clone Repo & Deploy') {
+        stage('Clone') {
             steps {
                 echo 'deploying...'
                 ansiColor('xterm'){
@@ -15,7 +15,8 @@ pipeline{
                         playbook: 'prisma_live.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: '226_docker',
-                        skippedTags: 'elasticsearch_restart,reindex_all,dynamic_cmd',
+#                        skippedTags: 'elasticsearch_restart,reindex_all,dynamic_cmd',
+			tags: cache_flush
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -26,6 +27,25 @@ pipeline{
                  }
             }
         }
+        stage('Setup Upgrade') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'prisma_live.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: '226_docker',
+        #                skippedTags: 'elasticsearch_restart,reindex_all,dynamic_cmd',
+			tags: cache_flush
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])  
+                 }   
+            }   
+        } 
     }
     post {
         always {
