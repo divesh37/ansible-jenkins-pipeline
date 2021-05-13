@@ -44,6 +44,131 @@ pipeline{
                  }   
             }   
         } 
+        stage('Setup Upgrade') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'prisma_stage.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: '226_docker',
+                        skippedTags: 'clone,maintenance_enable,composer_install,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Compile') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'prisma_stage.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: '226_docker',
+                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'prisma_stage.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: '226_docker',
+                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Cache Flush') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'prisma_stage.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: '226_docker',
+                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,static_content_deploy,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Setting Permissions') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'prisma_stage.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: '226_docker',
+                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,static_content_deploy,cache_flush,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        stage('Disabling Maintenance Mood') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'prisma_stage.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: '226_docker',
+                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,static_content_deploy,cache_flush,permission,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Docker Restart') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'prisma_stage.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: '226_docker',
+                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,dynamic_cmd',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])  
+                 }   
+            }   
+        }  
     }
     post {
         always {
