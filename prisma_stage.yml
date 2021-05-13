@@ -30,6 +30,7 @@
     - name: removing cache files and directories
       include_role:
         name: roles/remove_cache
+      tags: remove_cache
     - name: Running setup upgrade
       include_role:
         name: roles/setup_upgrade
