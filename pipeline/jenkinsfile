@@ -14,7 +14,8 @@ pipeline{
                         playbook: 'default.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-                        skippedTags: 'maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        //skippedTags: 'maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+  		        tags: 'clone',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -32,7 +33,8 @@ pipeline{
                         playbook: 'default.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-                        skippedTags: 'clone,maintenance_enable,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        //skippedTags: 'clone,maintenance_enable,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+		        tags: 'maintenance_enable,composer_install,remove_cache',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -50,7 +52,8 @@ pipeline{
                         playbook: 'default.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-                        skippedTags: 'clone,maintenance_enable,composer_install,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+//                        skippedTags: 'clone,maintenance_enable,composer_install,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+			tags: 'setup_upgrade',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -68,7 +71,8 @@ pipeline{
                         playbook: 'default.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+//                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+			tags: 'di_compile',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -86,7 +90,8 @@ pipeline{
                         playbook: 'default.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+//                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+			tags: 'static_content_deploy',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -104,7 +109,8 @@ pipeline{
                         playbook: 'default.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+//                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+			tags: 'cache_flush',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -122,7 +128,8 @@ pipeline{
                         playbook: 'default.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+//                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+			tags: 'permission',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -140,7 +147,8 @@ pipeline{
                         playbook: 'default.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+//                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+			tags: 'maintenance_disable',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -158,7 +166,8 @@ pipeline{
                         playbook: 'default.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,dynamic_cmd',
+//                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,dynamic_cmd',
+			tags: 'restart',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
