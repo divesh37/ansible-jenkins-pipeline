@@ -28,12 +28,4 @@ pipeline{
             }   
         }
     }  
-    post {
-        always {
-          step([$class: 'Mailer',
-            notifyEveryUnstableBuild: true,
-            recipients: "${email}",
-            sendToIndividuals: true])
-        }
-    }
 }
