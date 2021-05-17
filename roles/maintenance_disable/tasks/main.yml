@@ -2,6 +2,9 @@
 # tasks file for maintenance_disable
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
+      tags: maintenance_disable
     - command: "docker exec {{ container_id.stdout }} bin/magento maintenance:disable"
       register: maintenance_disable
+      tags: maintenance_disable
     - debug: msg={{ maintenance_disable }}
+      tags: maintenance_disable

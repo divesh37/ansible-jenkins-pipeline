@@ -6,6 +6,9 @@
       command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
+      tags: setup_upgrade
     - command: "docker exec {{ container_id.stdout }} bin/magento setup:upgrade"
-      register: setup_upgrade
-    - debug: msg={{ setup_upgrade }}
+      register: setup_upgrade1
+      tags: setup_upgrade
+    - debug: msg={{ setup_upgrade1 }}
+      tags: setup_upgrade

@@ -5,14 +5,23 @@
       command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
+      tags: permission
     - command: "docker exec {{ container_id.stdout }} rm -rf var/page_cache/* var/cache/* generated/code/* generated/metadata/* var/view_preprocessed/*"
       register: rm_rf
+      tags: permission
     - debug: msg={{ rm_rf }}
+      tags: permission
     - command: "docker exec {{ container_id.stdout }} /bin/bash -c 'chmod -R 775 . && chown -R www-data:www-data .'"
       register: chmod
+      tags: permission
     - debug: msg={{ chmod }}
+      tags: permission
     - command: "docker exec {{ container_id.stdout }} /bin/bash -c find var generated pub/static pub/media app/etc -type f -exec chmod g+w {}"
+      tags: permission
     - command: "docker exec {{ container_id.stdout }} /bin/bash -c find var generated pub/static pub/media app/etc -type d -exec chmod g+ws {}"
+      tags: permission
     - command: "docker exec {{ container_id.stdout }} /bin/bash -c 'chmod u+x bin/magento'"
       register: chmod
+      tags: permission
     - debug: msg={{ chmod }}
+      tags: permission
