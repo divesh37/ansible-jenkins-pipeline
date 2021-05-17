@@ -6,19 +6,14 @@ pipeline{
                 echo 'Starting Pipeline'
             }
         }
-        stage('Build Started'){
-                steps { 
-                        mail to:"${email}", subject:"Started Build: ${currentBuild.fullDisplayName}", body: " Hi Team, \n Build ${currentBuild.fullDisplayName} started check live status click on this below link:\n ${BUILD_URL}"
-                        }
-                }
         stage('Clone') {
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-  		        tags: 'clone',
+                        skippedTags: 'maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -33,10 +28,10 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-		        tags: 'maintenance_enable,composer_install,remove_cache',
+                        skippedTags: 'clone,maintenance_enable,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -51,10 +46,10 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-			tags: 'setup_upgrade',
+                        skippedTags: 'clone,maintenance_enable,composer_install,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -69,10 +64,10 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-			tags: 'di_compile',
+                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -87,10 +82,10 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-			tags: 'static_content_deploy',
+                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -105,10 +100,10 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-			tags: 'cache_flush',
+                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,static_content_deploy,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -123,10 +118,10 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-			tags: 'permission',
+                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,static_content_deploy,cache_flush,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -141,10 +136,10 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-			tags: 'maintenance_disable',
+                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,static_content_deploy,cache_flush,permission,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -159,10 +154,10 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-			tags: 'restart',
+                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di-compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,dynamic_cmd',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -174,12 +169,12 @@ pipeline{
             }   
         }  
     }
-    post {  
-        success {
-            mail to:"${email}", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: " Hi Team, \n ${currentBuild.fullDisplayName} Deployed through Jenkins. Click to check the consule output ${BUILD_URL}"
-        }
-        failure {
-            mail to:"${email}", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Hi Team, \n ${currentBuild.fullDisplayName} Failed build url ${BUILD_URL}"
+    post {
+        always {
+          step([$class: 'Mailer',
+            notifyEveryUnstableBuild: true,
+            recipients: "${email}",
+            sendToIndividuals: true])
         }
     }
 }
