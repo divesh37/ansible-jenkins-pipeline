@@ -10,7 +10,9 @@
     - name: Triming branch name
       shell: echo "{{ branch }}" | sed 's/.*origin1\///'
       register: branch_name
+      tags: clone
     - debug: msg={{ branch_name.stdout }}
+      tags: clone
     - name: pull from git
       git:
         repo: "{{ repository }}"
