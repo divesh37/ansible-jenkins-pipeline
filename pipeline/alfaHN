@@ -4,17 +4,21 @@ pipeline{
         stage('Initiating Pipeline'){
             steps{
                 echo 'Starting Pipeline'
-                echo '${p_path}'
             }
         }
+        stage('Build Started'){
+                steps { 
+                        mail to:"${email}", subject:"Started Build: ${currentBuild.fullDisplayName}", body: " Hi Team, \n Build ${currentBuild.fullDisplayName} started check live status click on this below link:\n ${BUILD_URL}"
+                        }
+                }
         stage('Clone') {
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
                         playbook: 'alfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: '226_docker',
-                        skippedTags: 'maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        credentialsId: 'devops_staging',
+  		        tags: 'clone',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -31,8 +35,8 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'alfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: '226_docker',
-                        skippedTags: 'clone,maintenance_enable,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        credentialsId: 'devops_staging',
+		        tags: 'maintenance_enable,composer_install,remove_cache',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -49,8 +53,8 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'alfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: '226_docker',
-                        skippedTags: 'clone,maintenance_enable,composer_install,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        credentialsId: 'devops_staging',
+			tags: 'setup_upgrade',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -67,8 +71,8 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'alfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: '226_docker',
-                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        credentialsId: 'devops_staging',
+			tags: 'di_compile',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -85,8 +89,8 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'alfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: '226_docker',
-                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        credentialsId: 'devops_staging',
+			tags: 'static_content_deploy',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -103,8 +107,8 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'alfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: '226_docker',
-                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        credentialsId: 'devops_staging',
+			tags: 'cache_flush',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -121,8 +125,8 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'alfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: '226_docker',
-                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        credentialsId: 'devops_staging',
+			tags: 'permission',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -139,8 +143,8 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'alfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: '226_docker',
-                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
+                        credentialsId: 'devops_staging',
+			tags: 'maintenance_disable',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -157,8 +161,8 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'alfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: '226_docker',
-                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,dynamic_cmd',
+                        credentialsId: 'devops_staging',
+			tags: 'restart',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
@@ -170,12 +174,12 @@ pipeline{
             }   
         }  
     }
-    post {
-        always {
-          step([$class: 'Mailer',
-            notifyEveryUnstableBuild: true,
-            recipients: "${email}",
-            sendToIndividuals: true])
+    post {  
+        success {
+            mail to:"${email}", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: " Hi Team, \n ${currentBuild.fullDisplayName} Deployed through Jenkins. Click to check the consule output ${BUILD_URL}"
+        }
+        failure {
+            mail to:"${email}", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Hi Team, \n ${currentBuild.fullDisplayName} Failed build url ${BUILD_URL}"
         }
     }
 }
