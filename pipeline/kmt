@@ -11,7 +11,7 @@ pipeline{
                         mail to:"${email}", subject:"Started Build: ${currentBuild.fullDisplayName}", body: " Hi Team, \n Build ${currentBuild.fullDisplayName} started check live status click on this below link:\n ${BUILD_URL}"
                         }
                 }
-        stage('Clone') {
+        stage('Cloning Repository') {
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
@@ -65,7 +65,7 @@ pipeline{
                  }
             }
         }
-        stage('Compile') {
+        stage('Di Compile') {
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
@@ -83,7 +83,7 @@ pipeline{
                  }
             }
         }
-        stage('Deploy') {
+        stage('Static Content Deploy') {
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
