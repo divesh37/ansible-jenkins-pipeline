@@ -166,7 +166,7 @@ pipeline{
  //       stage('Docker Restart') {
  //           steps {
  //               ansiColor('xterm'){
-                    ansiblePlaybook(
+  //                  ansiblePlaybook(
  //                       playbook: 'default.yml',
 //                       inventory: 'ansible-config/inventory.inv',
 //                      credentialsId: 'devops_staging',
