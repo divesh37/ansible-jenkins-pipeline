@@ -163,25 +163,25 @@ pipeline{
                  }
             }
         }
-        stage('Docker Restart') {
-            steps {
-                ansiColor('xterm'){
+ //       stage('Docker Restart') {
+ //           steps {
+ //               ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
-                        inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
+ //                       playbook: 'default.yml',
+//                       inventory: 'ansible-config/inventory.inv',
+//                      credentialsId: 'devops_staging',
 //                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,dynamic_cmd',
-			tags: 'restart',
-                        colorized: true,
-                        extraVars: [
-                              project_path: '${p_path}',
-                              composefile: '${composefile}',
-                              branch: '${select_branch}',
-                              repository: '${Repository}'
-                        ])  
-                 }   
-            }   
-        }  
+//			tags: 'restart',
+//                        colorized: true,
+//                        extraVars: [
+//                              project_path: '${p_path}',
+//                              composefile: '${composefile}',
+//                              branch: '${select_branch}',
+//                              repository: '${Repository}'
+//                        ])  
+//                 }   
+//            }   
+ //       }  
     }
     post {  
         success {
