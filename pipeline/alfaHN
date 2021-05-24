@@ -155,24 +155,24 @@ pipeline{
                  }
             }
         }
-   //     stage('Docker Restart') {
-    //        steps {
-     //           ansiColor('xterm'){
-       //             ansiblePlaybook(
-         //               playbook: 'alfaHN.yml',
-          //              inventory: 'ansible-config/inventory.inv',
-          //              credentialsId: 'devops_staging',
-		//	tags: 'restart',
-        //                colorized: true,
-        //                extraVars: [
-        //                      project_path: '${p_path}',
-        //                      composefile: '${composefile}',
-        //                      branch: '${select_branch}',
-        //                      repository: '${Repository}'
-        //                ])  
-        //         }   
-        //    }   
-       // }  
+        stage('Docker Restart') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'alfaHN.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+			tags: 'restart',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])  
+                 }   
+            }   
+        }  
     }
     post {  
         success {
