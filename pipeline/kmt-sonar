@@ -33,7 +33,7 @@ stage('Code Quality Check via SonarQube') {
  steps {
      script {
        def scannerHome = tool 'sonarqube';
-       withSonarQubeEnv("sonarqube-container") {
+       withSonarQubeEnv("sonarqube-ambab") {
        sh "${tool("sonarqube")}/bin/sonar-scanner \
         -Dsonar.projectKey=km-trading \
         -Dsonar.sources=. \
