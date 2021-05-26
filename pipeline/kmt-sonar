@@ -29,11 +29,18 @@ pipeline{
                  }
             }
         }
+    stage('SonarQube Analysis') {
+        def mvnHome =  tool name: 'maven-3', type: 'maven'
+        withSonarQubeEnv('sonarqube_ambab') { 
+          sh "${mvnHome}/bin/mvn sonar:sonar"
+        }
+    }
         stage('SonarQube analysis') {
-           steps {
-                def scannerHome = tool 'SonarScanner 4.0';
+            steps {
+              def scannerHome = tool 'SonarScanner 4.0';
                 withSonarQubeEnv('SonarQube') {
                      sh "${scannerHome}/bin/sonar-scanner"
+
                 }
             }
         }
@@ -41,4 +48,4 @@ pipeline{
             steps {
                 waitForQualityGate abortPipeline: true
             }
-        }    
+        }        
