@@ -29,19 +29,17 @@ pipeline{
                  }
             }
         }
-stage('SonarCloud') {
-    steps {
-    withSonarQubeEnv('sonarqube_ambab') {
-        sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.login=$ORGANIZATION \
-        -Dsonar.projectKey=$PROJECT_NAME \
-        -Dsonar.sources=.'''
+stage('Code Quality Check via SonarQube') {
+ steps {
+     script {
+       def scannerHome = tool 'sonarqube';
+       withSonarQubeEnv("sonarqube-container") {
+       sh "${tool("sonarqube")}/bin/sonar-scanner \
+        -Dsonar.projectKey=km-trading \
+        -Dsonar.sources=. \
+        -Dsonar.host.url=https://sonarqube.a2zportals.co.in \
+        -Dsonar.login=7126c49466ada5aeca66cf5d24a6cc91e2357eb7"
+         }
+       }
+      }
     }
-  }
-}
-stage("Quality Gate") {
-  steps {
-    timeout(time: 1, unit: 'MINUTES') {
-        waitForQualityGate abortPipeline: true
-    }
-  }
-}
