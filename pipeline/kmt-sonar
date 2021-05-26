@@ -1,0 +1,43 @@
+pipeline{
+    agent any
+    stages{
+        stage('Initiating Pipeline'){
+            steps{
+                echo 'Starting Pipeline'
+            }
+        }
+        //stage('Build Started'){
+                steps { 
+                        mail to:"${email}", subject:"Started Build: ${currentBuild.fullDisplayName}", body: " Hi Team, \n Build ${currentBuild.fullDisplayName} started check live status click on this below link:\n ${BUILD_URL}"
+                        }
+                }//
+        stage('Cloning Repository') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'kmt.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+                tags: 'clone',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                  composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh "./gradlew sonarqube"
+                }
+            }
+        }
+        stage("Quality gate") {
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }    
