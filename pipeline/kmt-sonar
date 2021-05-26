@@ -30,12 +30,7 @@ pipeline{
             }
         }
 stage('SonarCloud') {
-  environment {
-    SCANNER_HOME = tool 'SonarQubeScanner'
-    ORGANIZATION = "96ae65a5dcf5c085d3eb5e8eba632cfa107ee154"
-    PROJECT_NAME = "kmt-trading"
-  }
-  steps {
+    steps {
     withSonarQubeEnv('sonarqube_ambab') {
         sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.login=$ORGANIZATION \
         -Dsonar.projectKey=$PROJECT_NAME \
