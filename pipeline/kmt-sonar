@@ -12,7 +12,8 @@ pipeline{
                         }
                 }//
         stage('Cloning Repository') {
-            steps {
+            steps 
+            {
                 ansiColor('xterm'){
                     ansiblePlaybook(
                         playbook: 'kmt.yml',
@@ -37,7 +38,7 @@ pipeline{
         script {
           withSonarQubeEnv("sonarqube") {
             sh "${scannerHome}/bin/sonar-scanner \
-                  -Dsonar.projectKey='${project_Key}' \
+                  -Dsonar.projectKey='kmt-trading' \
                   -Dsonar.sources=. \
                   -Dsonar.sourceEncoding=UTF-8 \
                   -Dsonar.host.url=https://sonarqube.a2zportals.co.in \
@@ -54,8 +55,8 @@ pipeline{
         timeout(time: 5, unit: 'MINUTES') {
           waitForQualityGate abortPipeline: true
         }
+       }
       }
-    }
-    }
-   }  
+     }
+  }  
  
