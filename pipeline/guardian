@@ -1,0 +1,221 @@
+pipeline{
+    agent any
+    stages{
+        stage('Initiating Pipeline'){
+            steps{
+                echo 'Starting Pipeline'
+            }
+        }
+        stage('Build Started'){
+                steps { 
+                        mail to:"${email}", subject:"Started Build: ${currentBuild.fullDisplayName}", body: " Hi Team, \n Build ${currentBuild.fullDisplayName} started check live status click on this below link:\n ${BUILD_URL}"
+                        }
+                }
+        stage('Cloning Repository') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'guardian.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+  		        tags: 'clone',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+			      composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Maintenance_Enable') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'guardian.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+                        tags: 'maintenance_enable,remove_cache',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Composer Update') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'guardian.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+                        tags: 'composer_Update',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ]) 
+                 }  
+            }  
+        }
+        stage('Composer Install') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'guardian.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+		        tags: 'composer_install',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])  
+                 }   
+            }   
+        } 
+        stage('Setup Upgrade') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'guardian.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+			tags: 'setup_upgrade',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Di Compile') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'guardian.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+			tags: 'di_compile',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Static Content Deploy') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'guardian.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+			tags: 'static_content_deploy',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Cache Flush') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'guardian.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+			tags: 'cache_flush',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Setting Permissions') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'guardian.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+			tags: 'permission',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Disabling Maintenance Mood') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'guardian.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+			tags: 'maintenance_disable',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Docker Restart') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'guardian.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'devops_staging',
+			tags: 'restart',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])  
+                 }   
+            }   
+        }  
+    }
+    post {  
+        success {
+            mail to:"${email}", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: " Hi Team, \n ${currentBuild.fullDisplayName} Deployed through Jenkins. Click to check the consule output ${BUILD_URL}"
+        }
+        failure {
+            mail to:"${email}", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Hi Team, \n ${currentBuild.fullDisplayName} Failed build url ${BUILD_URL}"
+        }
+    }
+}
