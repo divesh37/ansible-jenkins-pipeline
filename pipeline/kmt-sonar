@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
     agent any
     stages{
         stage('Initiating Pipeline'){
@@ -6,11 +6,6 @@ pipeline{
                 echo 'Starting Pipeline'
             }
         }
-        //stage('Build Started'){
-                steps { 
-                        mail to:"${email}", subject:"Started Build: ${currentBuild.fullDisplayName}", body: " Hi Team, \n Build ${currentBuild.fullDisplayName} started check live status click on this below link:\n ${BUILD_URL}"
-                        }
-                }//
         stage('Cloning Repository') {
             steps 
             {
@@ -58,5 +53,5 @@ pipeline{
        }
       }
      }
-  }  
- 
+ }
+
