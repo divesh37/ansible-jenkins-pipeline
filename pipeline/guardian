@@ -29,24 +29,24 @@ pipeline{
                  }
             }
         }
-        stage('Maintenance_Enable') {
-            steps {
-                ansiColor('xterm'){
-                    ansiblePlaybook(
-                        playbook: 'guardian.yml',
-                        inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
-                        tags: 'maintenance_enable,remove_cache',
-                        colorized: true,
-                        extraVars: [
-                              project_path: '${p_path}',
-                              composefile: '${composefile}',
-                              branch: '${select_branch}',
-                              repository: '${Repository}'
-                        ])
-                 }
-            }
-        }
+//        stage('Maintenance_Enable') {
+//            steps {
+//                ansiColor('xterm'){
+//                    ansiblePlaybook(
+//                        playbook: 'guardian.yml',
+//                        inventory: 'ansible-config/inventory.inv',
+//                        credentialsId: 'devops_staging',
+//                        tags: 'maintenance_enable,remove_cache',
+//                        colorized: true,
+//                        extraVars: [
+//                              project_path: '${p_path}',
+//                              composefile: '${composefile}',
+//                              branch: '${select_branch}',
+//                              repository: '${Repository}'
+//                        ])
+//                 }
+//            }
+//        }
         stage('Composer Update') {
             steps {
                 ansiColor('xterm'){
