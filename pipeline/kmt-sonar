@@ -180,32 +180,6 @@ pipeline{
                         ])
                  }
             }
-        }
-        stage('Docker Restart') {
-            steps {
-                ansiColor('xterm'){
-                    ansiblePlaybook(
-                        playbook: 'kmt.yml',
-                        inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
-			tags: 'restart',
-                        colorized: true,
-                        extraVars: [
-                              project_path: '${p_path}',
-                              composefile: '${composefile}',
-                              branch: '${select_branch}',
-                              repository: '${Repository}'
-                        ])  
-                 }   
-            }   
-        }  
-    }
-    post {  
-        success {
-            mail to:"${email}", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: " Hi Team, \n ${currentBuild.fullDisplayName} Deployed through Jenkins. Click to check the consule output ${BUILD_URL}"
-        }
-        failure {
-            mail to:"${email}", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Hi Team, \n ${currentBuild.fullDisplayName} Failed build url ${BUILD_URL}"
-        }
-    }
-}
+        } 
+    }   
+}          
