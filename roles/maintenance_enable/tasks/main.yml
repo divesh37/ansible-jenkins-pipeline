@@ -5,6 +5,9 @@
       command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q php"
       register: container_id
+      tags: maintenance_enable
     - command: "docker exec {{ container_id.stdout }} bin/magento maintenance:enable"
       register: maintenance_enable
+      tags: maintenance_enable
     - debug: msg={{ maintenance_enable }}
+      tags: maintenance_enable
