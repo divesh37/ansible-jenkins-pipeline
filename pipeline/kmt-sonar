@@ -12,7 +12,12 @@ pipeline {
 
     stage("Cloning Repository for SonarQube") {
       steps {
-        git branch: '${select_branch}', url: '${GITREPO}'
+        GIT_BRANCH_LOCAL = sh(
+          script: "echo '${select_branch}' | sed -e 's|origin/||g'",
+          returnStdout: true
+        ).trim()
+        echo "Git branch: ${GIT_BRANCH_LOCAL}"
+        git branch: '${GIT_BRANCH_LOCAL}', url: '${GITREPO}'
       }
     }
     stage('Code quality Check via SonarQube') {
