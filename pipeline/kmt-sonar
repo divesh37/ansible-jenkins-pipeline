@@ -14,177 +14,178 @@ pipeline {
       steps {
         git branch: '${select_branch}', url: '${GITREPO}'
       }
-
-      stage('Code quality Check via SonarQube') {
-        environment {
-          scannerHome = tool 'sonarqube-scanner'
-        }
-        steps {
-          script {
-            withSonarQubeEnv("sonarqube") {
-              sh "${scannerHome}/bin/sonar-scanner \
+    }
+    stage('Code quality Check via SonarQube') {
+      environment {
+        scannerHome = tool 'sonarqube-scanner'
+      }
+      steps {
+        script {
+          withSonarQubeEnv("sonarqube") {
+            sh "${scannerHome}/bin/sonar-scanner \
                   -Dsonar.projectKey='kmt-trading' \
                   -Dsonar.sources=. \
                   -Dsonar.sourceEncoding=UTF-8 \
                   -Dsonar.host.url=https://sonarqube.a2zportals.co.in \
                   -Dsonar.login=f07b56b7cd7bf1d05078f166b2d760c5d285173c"
 
-            }
+          }
 
-          }
-        }
-      }
-      stage("Quality Gate") {
-        steps {
-          timeout(time: 2, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-          }
-        }
-      }
-      stage('Cloning Repository') {
-        steps {
-          ansiColor('xterm') {
-            ansiblePlaybook(
-              playbook: 'kmt.yml',
-              inventory: 'ansible-config/inventory.inv',
-              credentialsId: 'devops_staging',
-              tags: 'clone',
-              colorized: true,
-              extraVars: [
-                project_path: '${p_path}',
-                composefile: '${composefile}',
-                branch: '${select_branch}',
-                repository: '${Repository}'
-              ])
-          }
-        }
-      }
-      stage('Composer Install') {
-        steps {
-          ansiColor('xterm') {
-            ansiblePlaybook(
-              playbook: 'kmt.yml',
-              inventory: 'ansible-config/inventory.inv',
-              credentialsId: 'devops_staging',
-              tags: 'maintenance_enable,composer_install,remove_cache',
-              colorized: true,
-              extraVars: [
-                project_path: '${p_path}',
-                composefile: '${composefile}',
-                branch: '${select_branch}',
-                repository: '${Repository}'
-              ])
-          }
-        }
-      }
-      stage('Setup Upgrade') {
-        steps {
-          ansiColor('xterm') {
-            ansiblePlaybook(
-              playbook: 'kmt.yml',
-              inventory: 'ansible-config/inventory.inv',
-              credentialsId: 'devops_staging',
-              tags: 'setup_upgrade',
-              colorized: true,
-              extraVars: [
-                project_path: '${p_path}',
-                composefile: '${composefile}',
-                branch: '${select_branch}',
-                repository: '${Repository}'
-              ])
-          }
-        }
-      }
-      stage('Di Compile') {
-        steps {
-          ansiColor('xterm') {
-            ansiblePlaybook(
-              playbook: 'kmt.yml',
-              inventory: 'ansible-config/inventory.inv',
-              credentialsId: 'devops_staging',
-              tags: 'di_compile',
-              colorized: true,
-              extraVars: [
-                project_path: '${p_path}',
-                composefile: '${composefile}',
-                branch: '${select_branch}',
-                repository: '${Repository}'
-              ])
-          }
-        }
-      }
-      stage('Static Content Deploy') {
-        steps {
-          ansiColor('xterm') {
-            ansiblePlaybook(
-              playbook: 'kmt.yml',
-              inventory: 'ansible-config/inventory.inv',
-              credentialsId: 'devops_staging',
-              tags: 'static_content_deploy',
-              colorized: true,
-              extraVars: [
-                project_path: '${p_path}',
-                composefile: '${composefile}',
-                branch: '${select_branch}',
-                repository: '${Repository}'
-              ])
-          }
-        }
-      }
-      stage('Cache Flush') {
-        steps {
-          ansiColor('xterm') {
-            ansiblePlaybook(
-              playbook: 'kmt.yml',
-              inventory: 'ansible-config/inventory.inv',
-              credentialsId: 'devops_staging',
-              tags: 'cache_flush',
-              colorized: true,
-              extraVars: [
-                project_path: '${p_path}',
-                composefile: '${composefile}',
-                branch: '${select_branch}',
-                repository: '${Repository}'
-              ])
-          }
-        }
-      }
-      stage('Setting Permissions') {
-        steps {
-          ansiColor('xterm') {
-            ansiblePlaybook(
-              playbook: 'kmt.yml',
-              inventory: 'ansible-config/inventory.inv',
-              credentialsId: 'devops_staging',
-              tags: 'permission',
-              colorized: true,
-              extraVars: [
-                project_path: '${p_path}',
-                composefile: '${composefile}',
-                branch: '${select_branch}',
-                repository: '${Repository}'
-              ])
-          }
-        }
-      }
-
-      stage('Disabling Maintenance Mood') {
-        steps {
-          ansiColor('xterm') {
-            ansiblePlaybook(
-              playbook: 'kmt.yml',
-              inventory: 'ansible-config/inventory.inv',
-              credentialsId: 'devops_staging',
-              tags: 'maintenance_disable',
-              colorized: true,
-              extraVars: [
-                project_path: '${p_path}',
-                composefile: '${composefile}',
-                branch: '${select_branch}',
-                repository: '${Repository}'
-              ])
-          }
         }
       }
     }
+    stage("Quality Gate") {
+      steps {
+        timeout(time: 2, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
+        }
+      }
+    }
+    stage('Cloning Repository') {
+      steps {
+        ansiColor('xterm') {
+          ansiblePlaybook(
+            playbook: 'kmt.yml',
+            inventory: 'ansible-config/inventory.inv',
+            credentialsId: 'devops_staging',
+            tags: 'clone',
+            colorized: true,
+            extraVars: [
+              project_path: '${p_path}',
+              composefile: '${composefile}',
+              branch: '${select_branch}',
+              repository: '${Repository}'
+            ])
+        }
+      }
+    }
+    stage('Composer Install') {
+      steps {
+        ansiColor('xterm') {
+          ansiblePlaybook(
+            playbook: 'kmt.yml',
+            inventory: 'ansible-config/inventory.inv',
+            credentialsId: 'devops_staging',
+            tags: 'maintenance_enable,composer_install,remove_cache',
+            colorized: true,
+            extraVars: [
+              project_path: '${p_path}',
+              composefile: '${composefile}',
+              branch: '${select_branch}',
+              repository: '${Repository}'
+            ])
+        }
+      }
+    }
+    stage('Setup Upgrade') {
+      steps {
+        ansiColor('xterm') {
+          ansiblePlaybook(
+            playbook: 'kmt.yml',
+            inventory: 'ansible-config/inventory.inv',
+            credentialsId: 'devops_staging',
+            tags: 'setup_upgrade',
+            colorized: true,
+            extraVars: [
+              project_path: '${p_path}',
+              composefile: '${composefile}',
+              branch: '${select_branch}',
+              repository: '${Repository}'
+            ])
+        }
+      }
+    }
+    stage('Di Compile') {
+      steps {
+        ansiColor('xterm') {
+          ansiblePlaybook(
+            playbook: 'kmt.yml',
+            inventory: 'ansible-config/inventory.inv',
+            credentialsId: 'devops_staging',
+            tags: 'di_compile',
+            colorized: true,
+            extraVars: [
+              project_path: '${p_path}',
+              composefile: '${composefile}',
+              branch: '${select_branch}',
+              repository: '${Repository}'
+            ])
+        }
+      }
+    }
+    stage('Static Content Deploy') {
+      steps {
+        ansiColor('xterm') {
+          ansiblePlaybook(
+            playbook: 'kmt.yml',
+            inventory: 'ansible-config/inventory.inv',
+            credentialsId: 'devops_staging',
+            tags: 'static_content_deploy',
+            colorized: true,
+            extraVars: [
+              project_path: '${p_path}',
+              composefile: '${composefile}',
+              branch: '${select_branch}',
+              repository: '${Repository}'
+            ])
+        }
+      }
+    }
+    stage('Cache Flush') {
+      steps {
+        ansiColor('xterm') {
+          ansiblePlaybook(
+            playbook: 'kmt.yml',
+            inventory: 'ansible-config/inventory.inv',
+            credentialsId: 'devops_staging',
+            tags: 'cache_flush',
+            colorized: true,
+            extraVars: [
+              project_path: '${p_path}',
+              composefile: '${composefile}',
+              branch: '${select_branch}',
+              repository: '${Repository}'
+            ])
+        }
+      }
+    }
+    stage('Setting Permissions') {
+      steps {
+        ansiColor('xterm') {
+          ansiblePlaybook(
+            playbook: 'kmt.yml',
+            inventory: 'ansible-config/inventory.inv',
+            credentialsId: 'devops_staging',
+            tags: 'permission',
+            colorized: true,
+            extraVars: [
+              project_path: '${p_path}',
+              composefile: '${composefile}',
+              branch: '${select_branch}',
+              repository: '${Repository}'
+            ])
+        }
+      }
+    }
+
+    stage('Disabling Maintenance Mood') {
+      steps {
+        ansiColor('xterm') {
+          ansiblePlaybook(
+            playbook: 'kmt.yml',
+            inventory: 'ansible-config/inventory.inv',
+            credentialsId: 'devops_staging',
+            tags: 'maintenance_disable',
+            colorized: true,
+            extraVars: [
+              project_path: '${p_path}',
+              composefile: '${composefile}',
+              branch: '${select_branch}',
+              repository: '${Repository}'
+            ])
+        }
+      }
+    }
+
   }
+}
