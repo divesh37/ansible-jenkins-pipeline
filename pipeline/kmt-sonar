@@ -15,7 +15,7 @@ pipeline {
       steps {
         sh 'mkdir -p sonarqube'
         dir("sonarqube") {
-          git branch: "develop" ,
+          git branch: "${select_branch}" ,
             url: "${GITREPO}"
         }
       }
