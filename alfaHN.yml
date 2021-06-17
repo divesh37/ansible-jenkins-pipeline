@@ -43,7 +43,7 @@
       tags: di_compile
     - name: Running static content deploy
       include_role:
-        name: roles/static-content_deploy
+        name: roles/static_content_deploy_multi_theme
       tags: static_content_deploy
     - name: Running cache flush
       include_role:
