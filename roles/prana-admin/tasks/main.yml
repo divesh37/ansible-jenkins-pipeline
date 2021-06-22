@@ -3,8 +3,8 @@
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} down"
       register: container_id
       tags: prana-admin-build
-    - debug: msg={{ container_id.stdout }}
+    - debug: msg={{ container_id }}
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d --build"
-      register: container_id
+      register: prana-build
       tags: prana-admin-build
-    - debug: msg={{ container_id.stdout }}
+    - debug: msg={{ prana-build }}
