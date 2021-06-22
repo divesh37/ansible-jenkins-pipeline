@@ -36,7 +36,7 @@ pipeline{
                         playbook: 'default.yml',
                         inventory: 'ansible-config/inventory.inv',
                         credentialsId: 'devops_staging',
-			tags: 'restart',
+			tags: 'prana-admin-build',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
