@@ -6,7 +6,7 @@
     - debug: msg={{ container_id }}
       tags: prana-admin-build
     - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d --build"
-      register: prana-build
+      register: prana_build
       tags: prana-admin-build
-    - debug: msg={{ prana-build }}
+    - debug: msg={{ prana_build }}
       tags: prana-admin-build
