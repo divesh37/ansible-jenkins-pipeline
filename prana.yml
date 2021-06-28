@@ -34,7 +34,7 @@
 #      include_role:
 #       name: roles/test_converge_prana_api
 #      tags: prana_conv_test
-#    - name: Run your own choice command
-#      include_role:
-#       name: roles/prana_api
-#      tags: prana_cmd
+    - name: Run your own choice command
+      include_role:
+       name: roles/prana_api
+      tags: prana_cmd
