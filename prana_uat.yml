@@ -2,6 +2,7 @@
  - hosts: ambab_uat
    gather_facts: false
    become: true
+   become_user: automation
    environment:
     PYTHONPATH: /root/.local/lib/python2.7/site-packages
 
