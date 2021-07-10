@@ -1,5 +1,5 @@
 [ambab_uat]
-34.221.218.92
+35.83.38.162
 
 [vars]
 ansible_python_interpreter=/usr/bin/python3
