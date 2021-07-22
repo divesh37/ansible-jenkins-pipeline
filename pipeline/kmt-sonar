@@ -24,12 +24,13 @@ pipeline {
     stage('Code quality Check via SonarQube') {
       environment {
         scannerHome = tool 'sonarqube-scanner'
+        PROJECT = "kmt-tradind-dev"
       }
       steps {
         script {
           withSonarQubeEnv("sonarqube") {
             sh "${scannerHome}/bin/sonar-scanner \
-                  -Dsonar.projectKey='kmt-trading-dev' \
+                  -Dsonar.projectKey= $PROJECT \
                   -Dsonar.sources=. \
                   -Dsonar.projectBaseDir='./sonarqube' \
                   -Dsonar.sourceEncoding=UTF-8 \
