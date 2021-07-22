@@ -32,7 +32,7 @@ environment {
         script {
           withSonarQubeEnv("sonarqube") {
             sh "${scannerHome}/bin/sonar-scanner \
-                  -Dsonar.projectKey= $PROJECT \
+                  -Dsonar.projectKey= 'kmt-trading-dev' \
                   -Dsonar.sources=. \
                   -Dsonar.projectBaseDir='./sonarqube' \
                   -Dsonar.sourceEncoding=UTF-8 \
