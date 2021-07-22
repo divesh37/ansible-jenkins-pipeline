@@ -4,6 +4,9 @@ pipeline {
   tools {
     nodejs "node"
   }
+environment {
+    PROJECT = "kmt-tradind-dev"                 
+}
   stages {
     stage('Initiating Pipeline') {
       steps {
@@ -24,7 +27,6 @@ pipeline {
     stage('Code quality Check via SonarQube') {
       environment {
         scannerHome = tool 'sonarqube-scanner'
-        PROJECT = "kmt-tradind-dev"
       }
       steps {
         script {
