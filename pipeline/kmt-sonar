@@ -5,7 +5,7 @@ pipeline {
     nodejs "node"
   }
 environment {
-    PROJECT = "kmt-tradind-dev"                 
+    PROJECT = "kmt-trading-dev"                 
 }
   stages {
     stage('Initiating Pipeline') {
@@ -32,7 +32,7 @@ environment {
         script {
           withSonarQubeEnv("sonarqube") {
             sh "${scannerHome}/bin/sonar-scanner \
-                  -Dsonar.projectKey= 'kmt-trading-dev' \
+                  -Dsonar.projectKey= $PROJECT \
                   -Dsonar.sources=. \
                   -Dsonar.projectBaseDir='./sonarqube' \
                   -Dsonar.sourceEncoding=UTF-8 \
