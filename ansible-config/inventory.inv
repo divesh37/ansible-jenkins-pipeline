@@ -4,5 +4,8 @@
 [prisma]
 65.0.82.29
 
+[new_staging]
+52.13.243.179
+
 [vars]
 ansible_python_interpreter=/usr/bin/python3
