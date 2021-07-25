@@ -1,0 +1,60 @@
+pipeline{
+    agent any
+    stages{
+        stage('Initiating Pipeline'){
+            steps{
+                echo 'Starting Pipeline'
+            }
+        }
+        stage('Build Started'){
+                steps { 
+                mail to:"${email}", subject:"Started Build: ${currentBuild.fullDisplayName}", body: " Hi Team, \n Build ${currentBuild.fullDisplayName} started check live status click on this below link:\n ${BUILD_URL}"
+                        }
+                }
+        stage('Cloning Repository') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'newdefault.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'New_Staging_DevOps',
+  		        tags: 'clone',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+			      composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])
+                 }
+            }
+        }
+        stage('Docker Restart') {
+            steps {
+                ansiColor('xterm'){
+                    ansiblePlaybook(
+                        playbook: 'newdefault.yml',
+                        inventory: 'ansible-config/inventory.inv',
+                        credentialsId: 'New_Staging_DevOps',
+			tags: 'prana-admin-build',
+                        colorized: true,
+                        extraVars: [
+                              project_path: '${p_path}',
+                              composefile: '${composefile}',
+                              branch: '${select_branch}',
+                              repository: '${Repository}'
+                        ])  
+                 }   
+            }   
+        }  
+    }
+    post {  
+        success {
+            mail to:"${email}", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: " Hi Team, \n ${currentBuild.fullDisplayName} Deployed through Jenkins. Click to check the consule output ${BUILD_URL}"
+        }
+        failure {
+            mail to:"${email}", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Hi Team, \n ${currentBuild.fullDisplayName} Failed build url ${BUILD_URL}"
+        }
+    }
+
+}
