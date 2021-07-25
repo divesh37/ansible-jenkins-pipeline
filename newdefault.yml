@@ -2,8 +2,8 @@
  - hosts: new_staging
    gather_facts: false
    become: true
-#   environment:
-#    PYTHONPATH: /root/.local/lib/python2.7/site-packages
+   environment:
+    PYTHONPATH: /root/.local/lib/python2.7/site-packages
 
 
    tasks:
