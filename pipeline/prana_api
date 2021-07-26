@@ -14,7 +14,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'prana.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: '226_docker',
+                        credentialsId: 'New_Staging_DevOps',
                         skippedTags: 'prana_cmd',
                         colorized: true,
                         extraVars: [
