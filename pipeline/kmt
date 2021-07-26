@@ -17,7 +17,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
+                        credentialsId: 'New_Staging_DevOps',
   		        tags: 'clone',
                         colorized: true,
                         extraVars: [
@@ -35,7 +35,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
+                        credentialsId: 'New_Staging_DevOps',
 		        tags: 'maintenance_enable,composer_install,remove_cache',
                         colorized: true,
                         extraVars: [
@@ -53,7 +53,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
+                        credentialsId: 'New_Staging_DevOps',
 			tags: 'setup_upgrade',
                         colorized: true,
                         extraVars: [
@@ -71,7 +71,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
+                        credentialsId: 'New_Staging_DevOps',
 			tags: 'di_compile',
                         colorized: true,
                         extraVars: [
@@ -89,7 +89,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
+                        credentialsId: 'New_Staging_DevOps',
 			tags: 'static_content_deploy',
                         colorized: true,
                         extraVars: [
@@ -107,7 +107,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
+                        credentialsId: 'New_Staging_DevOps',
 			tags: 'cache_flush',
                         colorized: true,
                         extraVars: [
@@ -125,7 +125,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
+                        credentialsId: 'New_Staging_DevOps',
 			tags: 'permission',
                         colorized: true,
                         extraVars: [
@@ -143,7 +143,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
+                        credentialsId: 'New_Staging_DevOps',
 			tags: 'maintenance_disable',
                         colorized: true,
                         extraVars: [
@@ -161,7 +161,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'kmt.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
+                        credentialsId: 'New_Staging_DevOps',
 			tags: 'restart',
                         colorized: true,
                         extraVars: [
