@@ -15,9 +15,9 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'newdefault.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
+                        credentialsId: 'Ambab-Staging-52.38.215.56',
   		        tags: 'clone',
                         colorized: true,
                         extraVars: [
@@ -33,9 +33,9 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'default.yml',
+                        playbook: 'newdefault.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'devops_staging',
+                        credentialsId: 'Ambab-Staging-52.38.215.56',
 			tags: 'prana-admin-build',
                         colorized: true,
                         extraVars: [
