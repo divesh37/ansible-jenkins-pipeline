@@ -5,7 +5,7 @@
 65.0.82.29
 
 [new_staging]
-52.13.243.179
+52.38.215.56
 
 [vars]
 ansible_python_interpreter=/usr/bin/python3
