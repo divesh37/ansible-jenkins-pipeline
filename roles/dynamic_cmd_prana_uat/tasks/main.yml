@@ -3,7 +3,7 @@
     - name: Checking container status
       command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
       tags: dynamic_cmd
-    - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps api"
+    - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q api"
       register: container_id
       tags: dynamic_cmd
     - command: "docker exec {{ container_id.stdout }} {{ command }}"
