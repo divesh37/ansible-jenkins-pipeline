@@ -14,7 +14,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'prana.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'New_Staging_DevOps',
+                        credentialsId: 'Ambab-Staging-52.38.215.56',
                         skippedTags: 'prana_cmd',
                         colorized: true,
                         extraVars: [
