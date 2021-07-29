@@ -72,7 +72,7 @@
       tags: elasticsearch_restart
     - name: Run your own choice command
       include_role:
-       name: roles/dynamic_cmd
+       name: roles/dynamic_cmd_prana_uat
       tags: dynamic_cmd
     - name: prana-admin build
       include_role:
