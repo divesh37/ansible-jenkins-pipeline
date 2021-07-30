@@ -17,7 +17,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'newalfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'New_Staging_DevOps',
+                        credentialsId: 'Ambab-Staging-52.38.215.5',
   		        tags: 'clone',
                         colorized: true,
                         extraVars: [
@@ -35,7 +35,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'newalfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'New_Staging_DevOps',
+                        credentialsId: 'Ambab-Staging-52.38.215.5',
 		        tags: 'maintenance_enable,composer_install,remove_cache',
                         colorized: true,
                         extraVars: [
@@ -53,7 +53,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'newalfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'New_Staging_DevOps',
+                        credentialsId: 'Ambab-Staging-52.38.215.5',
 			tags: 'setup_upgrade',
                         colorized: true,
                         extraVars: [
@@ -71,7 +71,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'newalfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'New_Staging_DevOps',
+                        credentialsId: 'Ambab-Staging-52.38.215.5',
 			tags: 'di_compile',
                         colorized: true,
                         extraVars: [
@@ -89,7 +89,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'newalfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'New_Staging_DevOps',
+                        credentialsId: 'Ambab-Staging-52.38.215.5',
 			tags: 'static_content_deploy',
                         colorized: true,
                         extraVars: [
@@ -107,7 +107,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'newalfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'New_Staging_DevOps',
+                        credentialsId: 'Ambab-Staging-52.38.215.5',
 			tags: 'cache_flush',
                         colorized: true,
                         extraVars: [
@@ -125,7 +125,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'newalfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'New_Staging_DevOps',
+                        credentialsId: 'Ambab-Staging-52.38.215.5',
 			tags: 'permission',
                         colorized: true,
                         extraVars: [
@@ -143,7 +143,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'newalfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'New_Staging_DevOps',
+                        credentialsId: 'Ambab-Staging-52.38.215.5',
 			tags: 'maintenance_disable',
                         colorized: true,
                         extraVars: [
@@ -161,7 +161,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'newalfaHN.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: 'New_Staging_DevOps',
+                        credentialsId: 'Ambab-Staging-52.38.215.5',
 			tags: 'restart',
                         colorized: true,
                         extraVars: [
