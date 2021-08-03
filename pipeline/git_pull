@@ -13,7 +13,7 @@ pipeline{
                     ansiblePlaybook(
                         playbook: 'git_pull.yml',
                         inventory: 'ansible-config/inventory.inv',
-                        credentialsId: '226_docker',
+                        credentialsId: 'new_staging',
                         extraVars: [
                               project_path: '${p_path}',
 			      composefile: '${composefile}',
