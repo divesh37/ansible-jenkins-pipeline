@@ -1,5 +1,5 @@
 ---
- - hosts: staging_docker
+ - hosts: new_staging
    gather_facts: false
    become: true
    environment:
