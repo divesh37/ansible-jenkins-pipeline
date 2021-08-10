@@ -1,0 +1,13 @@
+---
+# tasks file for roles/prana_api
+    - name: Checking container status
+      command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} up -d"
+      tags: prana_logs
+    - command: bash -lc "cd {{ project_path }} && docker-compose -f {{ composefile }} ps -q api"
+      register: container_id
+      tags: prana_logs
+    - command: " {{ command }} "
+      register: prana_logs_output
+      tags: prana_logs
+    - debug: msg={{ prana_logs_output }}
+      tags: prana_logs

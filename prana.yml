@@ -38,3 +38,7 @@
       include_role:
        name: roles/prana_api
       tags: prana_cmd
+    - name: Run your own choice command to watch the logs
+      include_role:
+       name: roles/prana_logs
+      tags: prana_logs
