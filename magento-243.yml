@@ -1,0 +1,76 @@
+---
+ - hosts: new_staging
+   gather_facts: false
+   become: true
+   environment:
+    PYTHONPATH: /root/.local/lib/python2.7/site-packages
+
+
+   tasks:
+    - name: Triming branch name
+      shell: echo "{{ branch }}" | sed 's/.*origin1\///'
+      register: branch_name
+      tags: clone
+    - debug: msg={{ branch_name.stdout }}
+      tags: clone
+    - name: pull from git
+      git:
+        repo: "{{ repository }}"
+        dest: "{{ project_path }}"
+        update: yes
+        version: "{{ branch_name.stdout }}"
+        force: yes
+      tags: clone
+    - name: Enabling maintenance enable...
+      include_role:
+        name: roles/maintenance_enable
+      tags: maintenance_enable
+    - name: Running composer install
+      include_role:
+        name: roles/composer_install
+      tags: composer_install
+    - name: removing cache files and directories
+      include_role:
+        name: roles/remove_cache
+      tags: remove_cache
+    - name: Running setup upgrade
+      include_role:
+        name: roles/setup_upgrade
+      tags: setup_upgrade
+    - name: Running di-compile
+      include_role:
+        name: roles/setup_di_compile
+      tags: di_compile
+    - name: Running static content deploy
+      include_role:
+        name: roles/static-content_deploy
+      tags: static_content_deploy
+    - name: Running cache flush
+      include_role:
+        name: roles/cache_flush
+      tags: cache_flush
+    - name: Setting permissions
+      include_role:
+        name: roles/commands
+      tags: permission
+    - name: Disabling maintenance mood
+      include_role:
+        name: roles/maintenance_disable
+      tags: maintenance_disable
+    - name: Restarting docker setup
+      include_role:
+       name: roles/docker_restart
+      tags: restart
+    - name: Reindex all 
+      include_role:
+       name: roles/reindex_all
+      tags: reindex_all
+    - name: Restart elasticsearch container
+      include_role:
+       name: roles/elasticsearch_restart
+      tags: elasticsearch_restart
+    - name: Run your own choice command
+      include_role:
+       name: roles/dynamic_cmd
+      tags: dynamic_cmd
+
