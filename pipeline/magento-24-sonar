@@ -15,7 +15,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'magneto_24.yml',
+                        playbook: 'magento_24.yml',
                         inventory: 'ansible-config/ambab_uat_inventory.inv',
                         credentialsId: 'ambab-uat',
                         //skippedTags: 'maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -34,7 +34,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'magneto_24.yml',
+                        playbook: 'magento_24.yml',
                         inventory: 'ansible-config/ambab_uat_inventory.inv',
                         credentialsId: 'ambab-uat',
                         //skippedTags: 'clone,maintenance_enable,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -53,7 +53,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'magneto_24.yml',
+                        playbook: 'magento_24.yml',
                         inventory: 'ansible-config/ambab_uat_inventory.inv',
                         credentialsId: 'ambab-uat',
 //                        skippedTags: 'clone,maintenance_enable,composer_install,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -72,7 +72,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'magneto_24.yml',
+                        playbook: 'magento_24.yml',
                         inventory: 'ansible-config/ambab_uat_inventory.inv',
                         credentialsId: 'ambab-uat',
 //                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -91,7 +91,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'magneto_24.yml',
+                        playbook: 'magento_24.yml',
                         inventory: 'ansible-config/ambab_uat_inventory.inv',
                         credentialsId: 'ambab-uat',
 //                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -110,7 +110,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'magneto_24.yml',
+                        playbook: 'magento_24.yml',
                         inventory: 'ansible-config/ambab_uat_inventory.inv',
                         credentialsId: 'ambab-uat',
 //                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -129,7 +129,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'magneto_24.yml',
+                        playbook: 'magento_24.yml',
                         inventory: 'ansible-config/ambab_uat_inventory.inv',
                         credentialsId: 'ambab-uat',
 //                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -148,7 +148,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'magneto_24.yml',
+                        playbook: 'magento_24.yml',
                         inventory: 'ansible-config/ambab_uat_inventory.inv',
                         credentialsId: 'ambab-uat',
 //                        skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
@@ -167,7 +167,7 @@ pipeline{
             steps {
                 ansiColor('xterm'){
                     ansiblePlaybook(
-                        playbook: 'magneto_24.yml',
+                        playbook: 'magento_24.yml',
                        inventory: 'ansible-config/ambab_uat_inventory.inv',
                       credentialsId: 'ambab-uat',
                         skippedTags: 'clone,maintenance_enable,composer_install,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,dynamic_cmd',
