@@ -16,13 +16,13 @@
       tags: permission
     - debug: msg={{ chmod }}
       tags: permission
-    - command: "docker exec {{ container_id.stdout }} /bin/bash -c find var generated pub/static pub/media app/etc -type f -exec chmod g+w {}"
+    - command: "docker exec {{ container_id.stdout }} /bin/bash -c find var vendor generated pub/static pub/media app/etc -type f -exec chmod g+w {}"
       tags: permission
-    - command: "docker exec {{ container_id.stdout }} /bin/bash -c find var generated pub/static pub/media app/etc -type d -exec chmod g+ws {}"
+    - command: "docker exec {{ container_id.stdout }} /bin/bash -c find var vendor generated pub/static pub/media app/etc -type d -exec chmod g+ws {}"
       tags: permission
-    - command: "docker exec {{ container_id.stdout }} /bin/bash -c chmod -R 777 var generated pub/static"
+    - command: "docker exec {{ container_id.stdout }} /bin/bash -c find var generated pub/static  -type d -exec chmod 777 {}"
       tags: permission
-    - command: "docker exec {{ container_id.stdout }} /bin/bash -c 'chmod u+x bin/magento'"
+    - command: "docker exec {{ container_id.stdout }} /bin/bash -c 'chmod  u+x bin/magento'"
       register: chmod
       tags: permission
     - debug: msg={{ chmod }}
