@@ -22,10 +22,10 @@
         version: "{{ branch_name.stdout }}"
         force: yes
       tags: clone
-    - name: Enabling maintenance enable...
+    - name: composer update...
       include_role:
-        name: roles/maintenance_enable
-      tags: maintenance_enable
+        name: roles/composer_update
+      tags: composer_update
     - name: Running composer install
       include_role:
         name: roles/composer_install
