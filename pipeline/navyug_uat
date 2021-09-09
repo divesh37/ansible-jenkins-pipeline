@@ -38,7 +38,7 @@ pipeline{
                         inventory: 'ansible-config/ambab_uat_inventory.inv',
                         credentialsId: 'ambab-uat',
                         //skippedTags: 'clone,maintenance_enable,remove_cache,setup_upgrade,di_compile,static_content_deploy,cache_flush,permission,maintenance_disable,elasticsearch_restart,reindex_all,restart,dynamic_cmd',
-		        tags: 'maintenance_enable,composer_install,remove_cache,composer_update',
+		        tags: 'maintenance_enable,composer_update,remove_cache,composer_install',
                         colorized: true,
                         extraVars: [
                               project_path: '${p_path}',
